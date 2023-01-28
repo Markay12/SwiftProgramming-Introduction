@@ -94,7 +94,7 @@ struct bottomView: View {
                 .font(.title)
                 .bold()
             
-        case 30...10000000:
+        case 30...1000000000000:
             Text("You are Obese!")
                 .foregroundColor(.red)
                 .font(.title)

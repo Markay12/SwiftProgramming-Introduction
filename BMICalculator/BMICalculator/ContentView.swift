@@ -12,19 +12,29 @@ struct ContentView: View {
                 
         NavigationView {
             VStack {
+                
+                Spacer()
+                
+                Text("BMI Calculator App")
+                    .font(.largeTitle)
+                    .bold()
+                    .underline()
+                Text("Developed by Mark Ashinhust")
+                Text("28 January 2023")
+                
                 Spacer()
                                 
                 NavigationLink(destination: topView())
                 {
                     
-                    Text("BMI Text Input Calculator!")
+                    Label("Text Input Calculator", systemImage: "number.square")
                     
                 }
                 .buttonStyle(.bordered)
-                    .background(.blue)
-                    .padding()
-                    .foregroundColor(.white)
-                    .clipShape(Capsule())
+                .background(.blue)
+                .padding()
+                .foregroundColor(.white)
+                
                     
                     
                 
@@ -33,7 +43,7 @@ struct ContentView: View {
                 NavigationLink(destination: bottomView())
                 {
                     
-                    Text("BMI Slider Calculator!")
+                    Label("Slider Input Calculator", systemImage: "number.square.fill")
                     
                 }
                 .buttonStyle(.bordered)
