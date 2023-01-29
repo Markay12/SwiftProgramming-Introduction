@@ -25,4 +25,11 @@ The docs directory is where all information on how to code with Swift 5 will be 
 
 ## Projects
 
+The projects that are made are written with a combined combination of Storyboards and Swift 5. The former has since become outdated (2023) and will not be used as much as Swift 5. The languages used in each project will be defined in the description.
 
+### IntroductionProject
+
+![Swift5](https://img.shields.io/badge/-Swift5-F05138?logo=swift&logoColor=black&style=flat)&nbsp;
+![Storyboards](https://img.shields.io/badge/-Storyboard-09B3AF?logo=storyblok&logoColor=white&style=flat)&nbsp;
+
+Description: This first project uses both Swift5 and Storyboard programming to create a simple application that takes in a name and outputs a greeting. This simple application is great at teaching the first use of text boxes as well as taking user inuput and changing text of the applications within run-time. Overall a great first project for those starting with XCode programming.
