@@ -73,41 +73,54 @@ struct bottomView: View {
         
         let bmi = (weightSlider / (heightSlider * heightSlider)) * 730
         
-        switch bmi
+        if (bmi < 17)
         {
             
-        case 1...17:
             Text("You are Underweight!")
                 .foregroundColor(.blue)
                 .font(.title)
                 .bold()
             
-        case 18...24:
+        }
+        else if (bmi >= 17 && bmi < 25)
+        {
+           
             Text("You are Normal Weight!")
                 .foregroundColor(.green)
                 .font(.title)
                 .bold()
             
-        case 25...30:
+        }
+        else if (bmi >= 25 && bmi <= 30)
+        {
+            
             Text("You are Pre-Obese!")
                 .foregroundColor(.purple)
                 .font(.title)
                 .bold()
             
-        case 30...1000000000000:
+            
+        }
+        else if (bmi > 30)
+        {
+            
             Text("You are Obese!")
                 .foregroundColor(.red)
                 .font(.title)
                 .bold()
             
-        default:
-            Text("BMI is Zero")
+            
+        }
+        else
+        {
+           
+            Text("BMI cannot be Calculated")
                 .bold()
                 .foregroundColor(.red)
                 .font(.title)
             
+            
         }
-        
         
         
     }
