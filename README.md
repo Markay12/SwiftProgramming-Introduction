@@ -6,7 +6,7 @@ Introduction to Swift and Storyboard Programming for iOS Development.
 # Table of Contents
 
 1. About
-2. Docs
+2. [Docs](https://github.com/Markay12/SwiftProgramming-Introduction/tree/main/docs)
 3. Projects
 
 ---
