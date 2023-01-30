@@ -33,3 +33,19 @@ The projects that are made are written with a combined combination of Storyboard
 ![Storyboards](https://img.shields.io/badge/-Storyboard-09B3AF?logo=storyblok&logoColor=white&style=flat)&nbsp;
 
 Description: This first project uses both Swift5 and Storyboard programming to create a simple application that takes in a name and outputs a greeting. This simple application is great at teaching the first use of text boxes as well as taking user inuput and changing text of the applications within run-time. Overall a great first project for those starting with XCode programming.
+
+### BMI Calculator
+
+![Swift5](https://img.shields.io/badge/-Swift5-F05138?logo=swift&logoColor=black&style=flat)&nbsp;
+
+Description: This bmi calculator was coded just using Swift 5. The calculator is a good first use of mathematical functions and creating an app using user input. This application is broken into two sections:
+
+1. Text Input Calculator
+
+This calculator uses text input from the user and then calculates their estimated BMI. The main issue with this project is being able to take user input and convert to a double value. This double value is then what is used for calculations.
+
+2. Slider Input Calculator
+
+This second calculator accomplishes the same function as the first project but uses slider input that continuously checks our equation to notify the user of their BMI.
+
+
