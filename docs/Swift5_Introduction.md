@@ -2,12 +2,12 @@
 
 ## Table of Contents
 
-1. [Swift 5: Programming Language Information]()
-2. [Swift Data Types]()
-3. [Variables and Constants]()
-4. [Optionals]()
-5. [Data Operations]()
-6. [Composite Data Types]()
+1. [Swift 5: Programming Language Information](https://github.com/Markay12/SwiftProgramming-Introduction/blob/main/docs/Swift5_Introduction.md#swift-5-programming-language-information)
+2. [Swift Data Types](https://github.com/Markay12/SwiftProgramming-Introduction/blob/main/docs/Swift5_Introduction.md#swift-data-types)
+3. [Variables and Constants](https://github.com/Markay12/SwiftProgramming-Introduction/blob/main/docs/Swift5_Introduction.md#variables-and-constants)
+4. [Optionals](https://github.com/Markay12/SwiftProgramming-Introduction/blob/main/docs/Swift5_Introduction.md#optionals)
+5. [Data Operations](https://github.com/Markay12/SwiftProgramming-Introduction/blob/main/docs/Swift5_Introduction.md#data-operations)
+6. [Composite Data Types](https://github.com/Markay12/SwiftProgramming-Introduction/blob/main/docs/Swift5_Introduction.md#composite-data-types)
 
 ---
 
