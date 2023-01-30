@@ -102,5 +102,35 @@ else
 
 ## Data Operations
 
-1. Operator `*` 
+1. Operator: `*` 
 	- Desctiption: Multiplication
+2. Operator: `/`
+	- Description: Division
+3. Operator: `+`
+	- Description: Addition
+4. Operator: `-`
+	- Description: Subtraction
+5. Operator`%`
+	- Desctription: Modulo
+6. Operator: `x == y`
+	- Description: Returns true if x is equal to y.
+7. Operator: `x > y`
+	- Description: Returns true if x is greater than y.
+8. Operator: `x >= y`
+	- Description: Returns true if x is greater than or equal to y.
+9. Operator: `x < y`
+	- Description: Returns true if x is less than y.
+10. Operator: `x <= y`
+	- Description: Returns true if x is less than or equal to y.
+11. Operator: `x != y`
+	- Description: Returns true if x is not equal to y.
+12. Operator: `x += y`
+	- Description: Add x to value y and place the result in value x.
+13. Operator: `x -= y`
+	- Description: Subtract value x from value y and place the result in value x.
+14. Operator: `x *= y`
+	- Description: Multiply value x to value y and place the result in value x.
+15. Operator: `x /= y`
+	- Description: Divide x by the value y and place the result in x.
+16. Operator: `x %= y`
+	- Description: Perform modulo operation on x and y and place the result in x.`
