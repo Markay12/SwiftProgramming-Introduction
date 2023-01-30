@@ -4,6 +4,14 @@ There are many ways to declare an array in Swift 5. An *array* will store values
 
 The same value can appear multiple times. This is to say that we can have an array with multiple values of 5.
 
+## Table of Contents
+
+1. [Shorthand Syntax]()
+2. [Combining Arrays]()
+3. [Accessing and Modifying Arrays]()
+
+---
+
 ## Array Type Shorthand Syntax
 
 The type of Swift array is written in full as Array<Element>, where Element is the type of values the array is allowed to store. This type can be written in shorthand form as [Element]. The shorthand form as seen here is what is preferred.
@@ -66,4 +74,61 @@ var baseball = ["White Sox", "Astros", "Mariners"]
 This array is declared as an array of string values. Since we have begun defining all values as Strings, this means that we cannot add any integer values to the array. We would need a tuple to have more than strings in this array.
 
 ## Accessing and Modifying an Array
+
+You can access and modify arrays through its methods and properties, or with subscript syntax.
+
+You can find the number of items in an array. To do this use: 
+
+```Swift
+// This will print that this list contains three items.
+
+print("There are \(baseballTeams.count) teams in the baseballTeams list.")
+```
+
+You can then use this information to check whether or not an array is empty. Using a conditional statement if/else to check for this value.
+
+```Swift
+if baseballTeams.isEmpty 
+{
+
+    print("There are no teams in this list.")
+    
+}
+else
+{
+
+    print("There are teams in this list. There are \(baseballTeams) teams.")
+    
+}
+
+// This will print whether or not there are teams and if there are, how many teams are in the list?
+
+```
+
+### Modifying the Array
+
+Adding a new item to the end of an array by using the (\_:) append method.
+
+`baseballTeams.append("Cardinals")`
+
+Alternatively, to append items to an array you can use the `+=` operator.
+
+```Swift
+baseballTeams += ["Orioles"]
+
+// You can also add multiple items
+baseballTeams += ["Rockies", "Texans"]
+
+```
+
+Lets gather the first element in the list. Array indexing in Swift begins at zero and not one.
+
+```Swift
+var firstTeam = baseballTeams[0]
+```
+
+We can also use this indexing to change the value of an item at a certain index.
+
+
+
 
