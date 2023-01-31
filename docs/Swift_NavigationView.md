@@ -4,10 +4,10 @@ A Navigation View is a container view that manages a stack of views, providing n
 
 ## Table of Content
 
-1. [Setup for XCode]()
-2. [Navigation Link]()
-3. [Navigation Bar]()
-4. [Navigation Bar Items]()
+1. [Setup for XCode](https://github.com/Markay12/SwiftProgramming-Introduction/blob/nagivationBar/docs/Swift_NavigationView.md#setup)
+2. [Navigation Link](https://github.com/Markay12/SwiftProgramming-Introduction/blob/nagivationBar/docs/Swift_NavigationView.md#navigation-link)
+3. [Navigation Bar](https://github.com/Markay12/SwiftProgramming-Introduction/blob/nagivationBar/docs/Swift_NavigationView.md#navigation-bar)
+4. [Navigation Bar Items](https://github.com/Markay12/SwiftProgramming-Introduction/blob/nagivationBar/docs/Swift_NavigationView.md#navigation-bar)
 
 ---
 
