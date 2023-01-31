@@ -6,9 +6,10 @@ The same value can appear multiple times. This is to say that we can have an arr
 
 ## Table of Contents
 
-1. [Shorthand Syntax]()
+1. [Shorthand Syntax](https://github.com/Markay12/SwiftProgramming-Introduction/blob/main/docs/Swift_Arrays.md#array-type-shorthand-syntax)
 2. [Combining Arrays]()
 3. [Accessing and Modifying Arrays]()
+4. [Iterating Over an Array]()
 
 ---
 
@@ -130,5 +131,49 @@ var firstTeam = baseballTeams[0]
 We can also use this indexing to change the value of an item at a certain index.
 
 
+We want to change the value at teams location 6 because the Texans are not a baseball team. That is a football team and we meant to do the Texas Rangers.
+
+```Swift
+// Texans are at 6 because arrays index from 0 in Swift
+
+baseballTeams[6] = "Rangers"  // change Texans to Rangers
+```
+
+To insert into an array at a specified index we can use the arrays insert(\_:at:) method:
+
+```Swift
+baseballTeams.insert("Padres", at: 0)
+```
+
+This will insert the baseball team Padres at the beginning of the array.
+
+### Removing Items from an Array
+
+To remove an item at a specific index you would use the remove command. This command can also be used to set a variable to the value that was removed (similar to pop).
+
+```Swift 
+let bestTeam = baseballTeams.remove(at: 2)
+
+// this removes the team Dodgers from the list (because we added Padres to the front) and sets the bestTeam as Dodgers.
+```
+
+When a value is removed from an array, the gaps are filled and will not be left blank. 
+
+Values at the end of an array can also be removed with the removeLast command.
+
+```Swift
+let lastTeam = baseballTeams.removeLast()
+```
+
+## Iterating Over an Array
+
+To iterate over an array with a loop, it works just like you would see in Python.
+
+```Swift
+for team in baseballTeams
+{
+    print(team)
+}
+```
 
 
