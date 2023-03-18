@@ -1,19 +1,25 @@
 //
-//  ContentView.swift
+//  loginScreen.swift
 //  FirebaseLoginAuthentication
 //
-//  Created by Mark Ashinhust on 3/16/23.
+//  Created by Mark Ashinhust on 3/17/23.
 //
 
 import SwiftUI
 import Firebase
 import Foundation
+import FirebaseAuth
 
 
-struct ContentView: View {
+struct loginScreen: View {
     
     @State private var email = ""
     @State private var password = ""
+    
+    // generic alert for login
+    @State private var showAlert = false
+    
+    @State private var successfulLogin = false
     
     var body: some View {
         NavigationView
@@ -26,9 +32,9 @@ struct ContentView: View {
                 RoundedRectangle(cornerRadius: 30, style: .continuous)
                     .foregroundStyle(.linearGradient(
                         colors: [
-                            Color(hex: 0xC1121F),
-                            Color(hex: 0xf77f00),
-                            Color(hex: 0xfcbf49)
+                            Color(hex: 0xfcbf49),
+                            Color(hex: 0xd62828),
+                            Color(hex: 0xeae2b7)
                         ],
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
@@ -40,7 +46,7 @@ struct ContentView: View {
                 VStack(spacing: 20)
                 {
                     
-                    Text("Sign Up")
+                    Text("Sign In")
                         .foregroundColor(.white)
                         .font(.system(size: 40, weight: .bold, design: .rounded))
                         .offset(x: -100, y: -150)
@@ -75,31 +81,29 @@ struct ContentView: View {
                     Button
                     {
                         
-                        //if this button is clicked, register the user
+                        //Function to Login
+                        login()
                         
-                        registerUser(email: email, password: password) { authResult, error in
-                            if let error = error {
-                                // Handle registration error
-                                print("Registration error: \(error.localizedDescription)")
-                            } else if let authResult = authResult {
-                                // Handle successful registration
-                                let user = authResult.user
-                                print("User registered successfully: \(user.uid)")
-                            }
+                        if (successfulLogin)
+                        {
+                            //move to app page
+                            
+                            
+                            
+                            
                         }
                         
                         
                     } label: {
-                        Text("Sign Up")
+                        Text("Log in")
                             .bold()
                             .frame(width: 200, height: 40)
                             .background(
                                 RoundedRectangle(cornerRadius: 10, style: .continuous)
                                     .fill(.linearGradient(
                                         colors: [
-                                            Color(hex: 0xC1121F),
-                                            Color(hex: 0xf77f00),
-                                            Color(hex: 0xfcbf49)
+                                            Color(hex: 0xc1121f),
+                                            Color(hex: 0xd62828)
                                         ],
                                         startPoint: .topLeading,
                                         endPoint: .bottomTrailing
@@ -109,16 +113,26 @@ struct ContentView: View {
                     }
                     .padding(.top)
                     .offset(y: 100)
+                    .alert(isPresented: $showAlert) {
+                                    Alert(
+                                        title: Text("Error"),
+                                        message: Text("Invalid email or password"),
+                                        dismissButton: .default(Text("OK"))
+                                    )
+                                }
                     
-                    NavigationLink(destination: loginScreen()
+                    
+                    
+                    NavigationLink(destination: ContentView()
                         .navigationBarBackButtonHidden(true))
                     {
-                        Text("Been here before?")
+                        Text("Sign Up")
                             .foregroundColor(.white)
                             .bold()
                     }
                     .padding(.top)
                     .offset(y: 110)
+                    
                 }
                 .frame(width: 350)
                 
@@ -126,48 +140,29 @@ struct ContentView: View {
                 
             }
             .ignoresSafeArea()
-            
         }
     }
     
-    func registerUser(email: String, password: String, completion: @escaping (AuthDataResult?, Error?) -> Void) {
-        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-            completion(authResult, error)
+    func login() {
+            Auth.auth().signIn(withEmail: email, password: password) { _, error in
+                if let error = error {
+                    // Handle login error
+                    print("Login error: \(error.localizedDescription)")
+                    showAlert = true
+                } else {
+                    // Handle successful login
+                    print("User logged in successfully")
+                    successfulLogin = true
+                }
+            }
         }
-    }
+    
 }
 
 
 
-struct ContentView_Previews: PreviewProvider {
+struct loginScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
-    }
-}
-
-
-extension View {
-    func placeholder<Content: View>(
-        when shouldShow: Bool,
-        alignment: Alignment = .leading,
-        @ViewBuilder placeholder: () -> Content) -> some View {
-
-        ZStack(alignment: alignment) {
-            placeholder().opacity(shouldShow ? 1 : 0)
-            self
-        }
-    }
-}
-
-// Extension to use hex colors
-extension Color {
-    init(hex: UInt, alpha: Double = 1.0) {
-        self.init(
-            .sRGB,
-            red: Double((hex >> 16) & 0xff) / 255,
-            green: Double((hex >> 08) & 0xff) / 255,
-            blue: Double((hex >> 00) & 0xff) / 255,
-            opacity: alpha
-        )
+        loginScreen()
     }
 }
