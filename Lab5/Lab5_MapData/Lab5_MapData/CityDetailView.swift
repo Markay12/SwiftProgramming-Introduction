@@ -26,40 +26,47 @@ struct CityDetailView: View {
             
             VStack{
                 
-                SearchBar(text: $search)
-                    .padding()
-                    .offset(y: 300)
                 
                 
                 MapView(cityName: city.name, latitude: $latitude, longitude: $longitude, search: $search)
-                    .scaledToFit()
+                    .scaledToFill()
                     .offset(y: -150)
                     .padding(.horizontal)
                 
-                
-
+            
                 
             }
             .navigationTitle(city.name)
             
             Rectangle()
                 .fill(LinearGradient(colors: [.red, .black], startPoint: .topLeading, endPoint: .bottomTrailing))
-                .frame(width: 400, height: 300)
+                .frame(width: 400, height: 350)
                 .cornerRadius(40)
+                .offset(y: 250)
+            
+            SearchBar(text: $search)
+                .padding()
                 .offset(y: 300)
+                .frame(width: 400, height: 20)
+                .background(LinearGradient(colors: [.white, .gray, .white], startPoint: .topLeading, endPoint: .bottomTrailing)
+                    .frame(width: 375, height: 60)
+                    .cornerRadius(18)
+                    .offset(y: 300)
+                    )
+            
             
             VStack
             {
                 
                 Text(city.name)
-                    .offset(y: 200)
+                    .offset(y: 150)
                     .foregroundColor(.white)
                     .bold()
                     .font(.title)
                     .underline()
                 
                 Text("Description: \(city.description)")
-                    .offset(y: 225)
+                    .offset(y: 175)
                     .foregroundColor(.white)
                     .font(.body)
                     .lineLimit(nil)
@@ -69,12 +76,8 @@ struct CityDetailView: View {
                 Text("Latitude: \(latitude), Longitude: \(longitude)")
                     .foregroundColor(.white)
                     .font(.body)
-                    .offset(y: 250)
-                
-                
-                
-                    
-                
+                    .offset(y: 200)
+   
                 
             }
         }
@@ -210,6 +213,8 @@ class MapViewCoordinator: NSObject, MKMapViewDelegate {
         self.parent.longitude = center.longitude
     }
 }
+
+
 
 
 
