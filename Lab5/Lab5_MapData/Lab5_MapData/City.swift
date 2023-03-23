@@ -7,6 +7,7 @@
 
 import Foundation
 
+// Structure to hold information for the Cities
 
 struct City {
     let name: String

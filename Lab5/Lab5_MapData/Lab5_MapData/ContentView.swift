@@ -15,23 +15,31 @@ struct ContentView: View {
         City(name: "Los Angeles", description: "The city of angels", image: "los-angeles"),
         City(name: "Chicago", description: "The windy city", image: "chicago"),
         City(name: "Houston", description: "Space City", image: "houston"),
-        City(name: "Philadelphia", description: "The city of brotherly love", image: "philadelphia")
+        City(name: "Tempe", description: "Home to Arizona State University!", image: "asu-stadium")
     ]
     
     // variable if showing button to add cities
     @State private var showingAddCity = false
     
+    // main view
     var body: some View {
+        
+        // Navigation View making the list items clickable
         NavigationView {
+            
+            // List to show the cities and their images
             List {
                 ForEach(cities.sorted { $0.name < $1.name }, id: \.name) { city in
                     NavigationLink(destination: CityDetailView(city: city)) {
                         HStack {
+                            //City image on the left
                             Image(city.image)
                                 .resizable()
                                 .frame(width: 50, height: 50)
                                 .cornerRadius(12)
+                            //Name of the city on the right
                             Text(city.name)
+                                .underline()
                         }
                     }
                 }
@@ -44,9 +52,13 @@ struct ContentView: View {
                         .navigationBarItems(trailing: Button(action: {
                             showingAddCity = true
                         }, label: {
-                            Image(systemName: "plus")
+                            // Image to add to the map
+                            Image(systemName: "plus.app")
+                                
                         }))
+                        // Show sheet to add a city
                         .sheet(isPresented: $showingAddCity, content: {
+                            // Using the defined add city view to append the new city 
                             AddCityView { name, description, image in
                                 let newCity = City(name: name, description: description, image: image)
                                 cities.append(newCity)

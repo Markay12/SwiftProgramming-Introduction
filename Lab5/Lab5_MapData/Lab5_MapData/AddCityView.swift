@@ -9,14 +9,18 @@ import SwiftUI
 
 struct AddCityView: View {
     
+    // Get the parameter information for the city
     @State private var name = ""
     @State private var description = ""
     @State private var image = ""
     
     var onSave: (String, String, String) -> Void
     
+    // Setup body of the sheet.
     var body: some View {
         NavigationView {
+            
+            // Form for the user to add the information
             Form {
                 Section(header: Text("City Info")) {
                     TextField("Name", text: $name)
@@ -25,9 +29,10 @@ struct AddCityView: View {
                 }
                 Button(action: {
                     
+                    // If user did not input image data, use asu-stadium.
                     if (image.isEmpty)
                     {
-                        image = "new-york"
+                        image = "asu-stadium"
                         
                     }
                     

@@ -25,8 +25,11 @@ struct ContentView: View {
                     Section(header: Text("Recent Data")) {
                         ForEach(healthData.prefix(3), id: \.date) { data in
                             HealthDataRow(data: data)
+                                
                         }
+                        
                     }
+                    
                 }
             }
             .listStyle(GroupedListStyle())

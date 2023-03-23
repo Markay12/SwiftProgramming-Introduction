@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AddData: View {
     @Binding var healthData: [HealthData]
+    @Environment(\.presentationMode) var presentationMode  // Add this variable
     @State var selectedDate = Date()
     @State var bloodPressureSystolic = ""
     @State var bloodPressureDiastolic = ""
@@ -41,24 +42,25 @@ struct AddData: View {
                 Section {
                     Button("Save") {
                         if let systolic = Int(bloodPressureSystolic),
-                           let diastolic = Int(bloodPressureDiastolic),
-                           let weight = Double(weightPounds),
-                           let sugar = Double(morningSugarLevel),
-                           !bloodPressureSystolic.isEmpty,
-                           !bloodPressureDiastolic.isEmpty,
-                           !weightPounds.isEmpty,
-                           !morningSugarLevel.isEmpty
+                            let diastolic = Int(bloodPressureDiastolic),
+                            let weight = Double(weightPounds),
+                            let sugar = Double(morningSugarLevel),
+                            !bloodPressureSystolic.isEmpty,
+                            !bloodPressureDiastolic.isEmpty,
+                            !weightPounds.isEmpty,
+                            !morningSugarLevel.isEmpty
                         {
                             let data = HealthData(date: selectedDate,
-                                                  bloodPressureSystolic: systolic,
-                                                  bloodPressureDiastolic: diastolic,
-                                                  weightPounds: weight,
-                                                  morningSugarLevel: sugar)
+                                                    bloodPressureSystolic: systolic,
+                                                    bloodPressureDiastolic: diastolic,
+                                                    weightPounds: weight,
+                                                    morningSugarLevel: sugar)
                             healthData.append(data)
                             bloodPressureSystolic = ""
                             bloodPressureDiastolic = ""
                             weightPounds = ""
                             morningSugarLevel = ""
+                            presentationMode.wrappedValue.dismiss() // Dismiss the view
                         }
                     }
                 }
