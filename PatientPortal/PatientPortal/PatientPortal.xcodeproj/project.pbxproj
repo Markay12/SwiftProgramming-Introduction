@@ -11,10 +11,10 @@
 		7D4E481929CB7916002C9F56 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4E481829CB7916002C9F56 /* ContentView.swift */; };
 		7D4E481B29CB7917002C9F56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D4E481A29CB7917002C9F56 /* Assets.xcassets */; };
 		7D4E481E29CB7917002C9F56 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D4E481D29CB7917002C9F56 /* Preview Assets.xcassets */; };
-		7D4E482D29CB7DA9002C9F56 /* SplashScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D4E482C29CB7DA9002C9F56 /* SplashScreen.xib */; };
 		7D4E482F29CB7F6A002C9F56 /* HealthData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4E482E29CB7F6A002C9F56 /* HealthData.swift */; };
 		7D4E483129CB7F9D002C9F56 /* AddData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4E483029CB7F9D002C9F56 /* AddData.swift */; };
 		7D4E483329CB7FD7002C9F56 /* HealthSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4E483229CB7FD7002C9F56 /* HealthSummary.swift */; };
+		7D5408B529CE18EA001E326D /* RiskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5408B429CE18EA001E326D /* RiskView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,10 +23,10 @@
 		7D4E481829CB7916002C9F56 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7D4E481A29CB7917002C9F56 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7D4E481D29CB7917002C9F56 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		7D4E482C29CB7DA9002C9F56 /* SplashScreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplashScreen.xib; sourceTree = "<group>"; };
 		7D4E482E29CB7F6A002C9F56 /* HealthData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthData.swift; sourceTree = "<group>"; };
 		7D4E483029CB7F9D002C9F56 /* AddData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddData.swift; sourceTree = "<group>"; };
 		7D4E483229CB7FD7002C9F56 /* HealthSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthSummary.swift; sourceTree = "<group>"; };
+		7D5408B429CE18EA001E326D /* RiskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,12 +59,12 @@
 		7D4E481529CB7916002C9F56 /* PatientPortal */ = {
 			isa = PBXGroup;
 			children = (
-				7D4E482C29CB7DA9002C9F56 /* SplashScreen.xib */,
 				7D4E481629CB7916002C9F56 /* PatientPortalApp.swift */,
 				7D4E481829CB7916002C9F56 /* ContentView.swift */,
 				7D4E482E29CB7F6A002C9F56 /* HealthData.swift */,
 				7D4E483029CB7F9D002C9F56 /* AddData.swift */,
 				7D4E483229CB7FD7002C9F56 /* HealthSummary.swift */,
+				7D5408B429CE18EA001E326D /* RiskView.swift */,
 				7D4E481A29CB7917002C9F56 /* Assets.xcassets */,
 				7D4E481C29CB7917002C9F56 /* Preview Content */,
 			);
@@ -139,7 +139,6 @@
 			files = (
 				7D4E481E29CB7917002C9F56 /* Preview Assets.xcassets in Resources */,
 				7D4E481B29CB7917002C9F56 /* Assets.xcassets in Resources */,
-				7D4E482D29CB7DA9002C9F56 /* SplashScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,6 +154,7 @@
 				7D4E481929CB7916002C9F56 /* ContentView.swift in Sources */,
 				7D4E481729CB7916002C9F56 /* PatientPortalApp.swift in Sources */,
 				7D4E483129CB7F9D002C9F56 /* AddData.swift in Sources */,
+				7D5408B529CE18EA001E326D /* RiskView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
