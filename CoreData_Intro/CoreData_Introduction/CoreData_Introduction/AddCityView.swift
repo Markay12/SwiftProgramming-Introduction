@@ -12,7 +12,7 @@ struct AddCityView: View {
     // Get the parameter information for the city
     @State private var name = "" // city name
     @State private var description = "" // city description
-    @State private var image = UIImage(named: "placeholder")! // city image
+    @State private var image = UIImage(named: "jbalasoo")! // city image
     @State private var showImagePicker = false // flag to show/hide image picker
     
     var onSave: (String, String, UIImage) -> Void // closure to save city info

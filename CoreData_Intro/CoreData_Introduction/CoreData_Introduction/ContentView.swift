@@ -10,27 +10,34 @@ import CoreData
 import Foundation
 
 struct ContentView: View {
+    // Get the managed object context for Core Data
     @Environment(\.managedObjectContext) private var viewContext
 
+    // Get all cities from Core Data, sorted by name
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \City.name, ascending: true)],
         animation: .default)
     private var cities: FetchedResults<City>
-    
+
+    // Show the Add City sheet
     @State var isAddCityViewPresented = false
     
     var body: some View {
         NavigationView {
+            // Show a list of all cities
             List {
                 ForEach(cities) { city in
+                    // Go to CityDetailView when a city is tapped
                     NavigationLink(destination: CityDetailView(city: city)) {
                             Text(city.name!)
                         }
                 }
+                // Allow cities to be deleted by swiping left
                 .onDelete(perform: deleteCities)
             }
             .navigationTitle("Cities")
             .toolbar {
+                // Add button to show Add City sheet
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         isAddCityViewPresented = true
@@ -40,6 +47,7 @@ struct ContentView: View {
                 }
             }
             .sheet(isPresented: $isAddCityViewPresented) {
+                // Show Add City sheet with callback to add new city
                 AddCityView { name, description, image in
                     addItem(name: name, description: description, image: image)
                     isAddCityViewPresented = false
@@ -48,6 +56,7 @@ struct ContentView: View {
         }
     }
 
+    // Add a new city to Core Data
     private func addItem(name: String, description: String, image: UIImage?) {
         withAnimation {
             let newCity = City(context: viewContext)
@@ -64,6 +73,7 @@ struct ContentView: View {
         }
     }
 
+    // Delete cities from Core Data
     private func deleteCities(offsets: IndexSet) {
         withAnimation {
             offsets.map { cities[$0] }.forEach(viewContext.delete)
@@ -79,6 +89,7 @@ struct ContentView: View {
 }
 
 
+// Set the date formatter for displaying dates in previews
 private let itemFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateStyle = .short
@@ -96,8 +107,9 @@ struct ContentView_Previews: PreviewProvider {
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
+        
+        // Show ContentView with a preview context
         return ContentView()
             .environment(\.managedObjectContext, context)
     }
 }
-
