@@ -21,6 +21,9 @@ struct LoginScreen: View {
     
     @State private var successfulLogin = false
     
+    // Variable to show the main page
+    @State private var showMainPage = false
+    
     var body: some View {
         NavigationView
         {
@@ -84,16 +87,6 @@ struct LoginScreen: View {
                         //Function to Login
                         login()
                         
-                        if (successfulLogin)
-                        {
-                            //move to app page
-                            
-                            
-                            
-                            
-                        }
-                        
-                        
                     } label: {
                         Text("Log in")
                             .bold()
@@ -120,6 +113,17 @@ struct LoginScreen: View {
                                         dismissButton: .default(Text("OK"))
                                     )
                                 }
+                    
+                    if showMainPage {
+                        NavigationLink(
+                            destination: MainPage()
+                                .navigationBarBackButtonHidden(true)
+                                ,
+                            isActive: $showMainPage) {
+                                EmptyView()
+                                
+                        }
+                    }
                     
                     
                     
@@ -153,6 +157,7 @@ struct LoginScreen: View {
                     // Handle successful login
                     print("User logged in successfully")
                     successfulLogin = true
+                    showMainPage = true
                 }
             }
         }

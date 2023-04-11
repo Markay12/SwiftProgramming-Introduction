@@ -15,6 +15,7 @@
 		7D57742E29E5FC8D006A5F7D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 7D57742D29E5FC8D006A5F7D /* FirebaseFirestore */; };
 		7D57743029E5FCC6006A5F7D /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D57742F29E5FCC6006A5F7D /* LoginScreen.swift */; };
 		7D57743229E5FE01006A5F7D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D57743129E5FE01006A5F7D /* GoogleService-Info.plist */; };
+		7D57743429E60074006A5F7D /* MainPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D57743329E60074006A5F7D /* MainPage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		7D0E794729DCC5C0003771E6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7D57742F29E5FCC6006A5F7D /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		7D57743129E5FE01006A5F7D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7D57743329E60074006A5F7D /* MainPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				7D0E794029DCC5BE003771E6 /* ExploratoryApp.swift */,
 				7D57743129E5FE01006A5F7D /* GoogleService-Info.plist */,
 				7D0E794229DCC5BE003771E6 /* ContentView.swift */,
+				7D57743329E60074006A5F7D /* MainPage.swift */,
 				7D57742F29E5FCC6006A5F7D /* LoginScreen.swift */,
 				7D0E794429DCC5C0003771E6 /* Assets.xcassets */,
 				7D0E794629DCC5C0003771E6 /* Preview Content */,
@@ -158,6 +161,7 @@
 				7D0E794329DCC5BE003771E6 /* ContentView.swift in Sources */,
 				7D0E794129DCC5BE003771E6 /* ExploratoryApp.swift in Sources */,
 				7D57743029E5FCC6006A5F7D /* LoginScreen.swift in Sources */,
+				7D57743429E60074006A5F7D /* MainPage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
