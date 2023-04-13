@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7D0E794129DCC5BE003771E6 /* ExploratoryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0E794029DCC5BE003771E6 /* ExploratoryApp.swift */; };
-		7D0E794329DCC5BE003771E6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0E794229DCC5BE003771E6 /* ContentView.swift */; };
+		7D0E794329DCC5BE003771E6 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0E794229DCC5BE003771E6 /* SignUpView.swift */; };
 		7D0E794529DCC5C0003771E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D0E794429DCC5C0003771E6 /* Assets.xcassets */; };
 		7D0E794829DCC5C0003771E6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D0E794729DCC5C0003771E6 /* Preview Assets.xcassets */; };
 		7D57742C29E5FC8D006A5F7D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7D57742B29E5FC8D006A5F7D /* FirebaseAuth */; };
@@ -21,7 +21,7 @@
 /* Begin PBXFileReference section */
 		7D0E793D29DCC5BE003771E6 /* Exploratory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Exploratory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D0E794029DCC5BE003771E6 /* ExploratoryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploratoryApp.swift; sourceTree = "<group>"; };
-		7D0E794229DCC5BE003771E6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		7D0E794229DCC5BE003771E6 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		7D0E794429DCC5C0003771E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7D0E794729DCC5C0003771E6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7D57742F29E5FCC6006A5F7D /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
@@ -63,7 +63,7 @@
 			children = (
 				7D0E794029DCC5BE003771E6 /* ExploratoryApp.swift */,
 				7D57743129E5FE01006A5F7D /* GoogleService-Info.plist */,
-				7D0E794229DCC5BE003771E6 /* ContentView.swift */,
+				7D0E794229DCC5BE003771E6 /* SignUpView.swift */,
 				7D57743329E60074006A5F7D /* MainPage.swift */,
 				7D57742F29E5FCC6006A5F7D /* LoginScreen.swift */,
 				7D0E794429DCC5C0003771E6 /* Assets.xcassets */,
@@ -158,7 +158,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7D0E794329DCC5BE003771E6 /* ContentView.swift in Sources */,
+				7D0E794329DCC5BE003771E6 /* SignUpView.swift in Sources */,
 				7D0E794129DCC5BE003771E6 /* ExploratoryApp.swift in Sources */,
 				7D57743029E5FCC6006A5F7D /* LoginScreen.swift in Sources */,
 				7D57743429E60074006A5F7D /* MainPage.swift in Sources */,

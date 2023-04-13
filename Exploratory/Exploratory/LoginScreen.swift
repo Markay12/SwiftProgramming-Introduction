@@ -127,7 +127,7 @@ struct LoginScreen: View {
                     
                     
                     
-                    NavigationLink(destination: ContentView()
+                    NavigationLink(destination: SignUpView()
                         .navigationBarBackButtonHidden(true))
                     {
                         Text("Sign Up")

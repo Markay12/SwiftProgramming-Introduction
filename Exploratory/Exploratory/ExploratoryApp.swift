@@ -20,7 +20,7 @@ struct ExploratoryApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LoginScreen()
         }
     }
 }
