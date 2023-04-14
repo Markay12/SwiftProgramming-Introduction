@@ -22,6 +22,13 @@ struct MainPage: View {
         alert = nil
     }
     
+    // code for sheets per button
+    @State private var showFriendsSheet = false
+    @State private var showHistorySheet = false
+    @State private var showStatsSheet = false
+    @State private var showSettingsSheet = false
+
+    
     var body: some View {
         ZStack(alignment: .bottom) {
             Map(coordinateRegion: $viewModel.region, showsUserLocation: true)
@@ -33,9 +40,10 @@ struct MainPage: View {
                 .onAppear {
                     viewModel.checkIfLocationServicesEnabled()
                 }
+                .offset(y: -200)
             
             Rectangle()
-                .fill(Color.black.opacity(0.85))
+                .fill(Color.black)
                 .frame(width: 395, height: 425)
                 .cornerRadius(20)
                 .padding(.horizontal)
@@ -59,7 +67,7 @@ struct MainPage: View {
                         
                         LazyVGrid(columns: Array(repeating: .init(.flexible()), count: 2), spacing: 15) {
                             Button(action: {
-                                // Action for button
+                                showFriendsSheet = true
                             }) {
                                 VStack(spacing: 5) {
                                     Image(systemName: "person.circle.fill")
@@ -75,9 +83,12 @@ struct MainPage: View {
                                 .cornerRadius(20)
                             }
                             .buttonStyle(TallButtonStyle())
+                            .sheet(isPresented: $showFriendsSheet) {
+                                FriendsView()
+                            }
                             
                             Button(action: {
-                                // Action for button
+                                showHistorySheet = true
                             }) {
                                 VStack(spacing: 5) {
                                     Image(systemName: "clock.circle.fill")
@@ -93,9 +104,12 @@ struct MainPage: View {
                                 .cornerRadius(20)
                             }
                             .buttonStyle(TallButtonStyle())
+                            .sheet(isPresented: $showHistorySheet) {
+                                HistoryView()
+                            }
                             
                             Button(action: {
-                                // Action for button
+                                showStatsSheet = true
                             }) {
                                 VStack(spacing: 5) {
                                     Image(systemName: "chart.pie.fill")
@@ -111,9 +125,13 @@ struct MainPage: View {
                                 .cornerRadius(20)
                             }
                             .buttonStyle(TallButtonStyle())
+                            .sheet(isPresented: $showStatsSheet) {
+                                StatisticsView()
+                            }
                             
                             Button(action: {
-                                // Action for button
+                                showSettingsSheet = true
+                                
                             }) {
                                 VStack(spacing: 5) {
                                     Image(systemName: "gear.circle.fill")
@@ -129,6 +147,9 @@ struct MainPage: View {
                                 .cornerRadius(20)
                             }
                             .buttonStyle(TallButtonStyle())
+                            .sheet(isPresented: $showSettingsSheet) {
+                                SettingsView()
+                            }
                         }
                         .padding(.horizontal, 20)
 
