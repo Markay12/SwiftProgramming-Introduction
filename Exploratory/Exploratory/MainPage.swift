@@ -36,7 +36,7 @@ struct MainPage: View {
             
             Rectangle()
                 .fill(Color.black.opacity(0.85))
-                .frame(width: 395, height: 400)
+                .frame(width: 395, height: 425)
                 .cornerRadius(20)
                 .padding(.horizontal)
                 .padding(.bottom, -50)
@@ -48,44 +48,91 @@ struct MainPage: View {
                             .padding(.bottom, -2.5)
                             .bold()
                             .underline()
+                            .offset(x: 20, y: 7)
 
                         Text("Where shall we begin today?")
                             .font(.headline)
                             .padding(.bottom)
                             .foregroundColor(.white)
+                            .offset(x: 20, y: 7)
 
-            
                         
-                        HStack
-                        {
+                        LazyVGrid(columns: Array(repeating: .init(.flexible()), count: 2), spacing: 15) {
                             Button(action: {
                                 // Action for button
                             }) {
-                                Text("Find Places")
-                                    .font(.headline)
-                                    .foregroundColor(.orange)
-                                    .padding(.horizontal, 20)
-                                    .padding(.vertical, 10)
-                                    .background(Color.white)
-                                    .cornerRadius(20)
-                                    
-                                
+                                VStack(spacing: 5) {
+                                    Image(systemName: "person.circle.fill")
+                                        .font(.system(size: 40))
+                                        .foregroundColor(.black)
+                                    Text("Friends")
+                                        .font(.headline)
+                                        .foregroundColor(.black)
+                                        .bold()
+                                }
+                                .padding()
+                                .background(Color.white)
+                                .cornerRadius(20)
                             }
+                            .buttonStyle(TallButtonStyle())
                             
                             Button(action: {
                                 // Action for button
                             }) {
-                                Text("Find Places")
-                                    .font(.headline)
-                                    .foregroundColor(.orange)
-                                    .padding(.horizontal, 20)
-                                    .padding(.vertical, 10)
-                                    .background(Color.white)
-                                    .cornerRadius(20)
-                                
+                                VStack(spacing: 5) {
+                                    Image(systemName: "clock.circle.fill")
+                                        .font(.system(size: 40))
+                                        .foregroundColor(.black)
+                                    Text("History")
+                                        .font(.headline)
+                                        .bold()
+                                        .foregroundColor(.black)
+                                }
+                                .padding()
+                                .background(Color.white)
+                                .cornerRadius(20)
                             }
+                            .buttonStyle(TallButtonStyle())
                             
+                            Button(action: {
+                                // Action for button
+                            }) {
+                                VStack(spacing: 5) {
+                                    Image(systemName: "chart.pie.fill")
+                                        .font(.system(size: 40))
+                                        .foregroundColor(.black)
+                                    Text("Statistics")
+                                        .font(.headline)
+                                        .foregroundColor(.black)
+                                        .bold()
+                                }
+                                .padding()
+                                .background(Color.white)
+                                .cornerRadius(20)
+                            }
+                            .buttonStyle(TallButtonStyle())
+                            
+                            Button(action: {
+                                // Action for button
+                            }) {
+                                VStack(spacing: 5) {
+                                    Image(systemName: "gear.circle.fill")
+                                        .font(.system(size: 40))
+                                        .foregroundColor(.black)
+                                    Text("Settings")
+                                        .font(.headline)
+                                        .bold()
+                                        .foregroundColor(.black)
+                                }
+                                .padding()
+                                .background(Color.white)
+                                .cornerRadius(20)
+                            }
+                            .buttonStyle(TallButtonStyle())
                         }
+                        .padding(.horizontal, 20)
+
+
                     }
                         .padding()
                 )
