@@ -35,8 +35,8 @@ struct MainPage: View {
                 }
             
             Rectangle()
-                .fill(Color.black.opacity(0.8))
-                .frame(width: 395, height: 350)
+                .fill(Color.black.opacity(0.85))
+                .frame(width: 395, height: 400)
                 .cornerRadius(20)
                 .padding(.horizontal)
                 .padding(.bottom, -50)
@@ -45,19 +45,46 @@ struct MainPage: View {
                         Text("Welcome Back!")
                             .font(.title)
                             .foregroundColor(.white)
-                            .padding()
-                            .offset(x: -70, y: -80)
+                            .padding(.bottom, -2.5)
                             .bold()
-                        Button(action: {
-                            // Action for button
-                        }) {
-                            Text("Find Places")
-                                .font(.headline)
-                                .foregroundColor(.orange)
-                                .padding(.horizontal, 20)
-                                .padding(.vertical, 10)
-                                .background(Color.white)
-                                .cornerRadius(20)
+                            .underline()
+
+                        Text("Where shall we begin today?")
+                            .font(.headline)
+                            .padding(.bottom)
+                            .foregroundColor(.white)
+
+            
+                        
+                        HStack
+                        {
+                            Button(action: {
+                                // Action for button
+                            }) {
+                                Text("Find Places")
+                                    .font(.headline)
+                                    .foregroundColor(.orange)
+                                    .padding(.horizontal, 20)
+                                    .padding(.vertical, 10)
+                                    .background(Color.white)
+                                    .cornerRadius(20)
+                                    
+                                
+                            }
+                            
+                            Button(action: {
+                                // Action for button
+                            }) {
+                                Text("Find Places")
+                                    .font(.headline)
+                                    .foregroundColor(.orange)
+                                    .padding(.horizontal, 20)
+                                    .padding(.vertical, 10)
+                                    .background(Color.white)
+                                    .cornerRadius(20)
+                                
+                            }
+                            
                         }
                     }
                         .padding()
