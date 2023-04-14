@@ -12,7 +12,7 @@ enum MapDetails
 {
     
     static let startingLocation = CLLocationCoordinate2D(latitude: 33.42348546947854, longitude:-111.9314781482712)
-    static let defaultSpan = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.005)
+    static let defaultSpan = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
     
 }
 
