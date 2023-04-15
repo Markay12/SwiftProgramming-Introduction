@@ -7,13 +7,23 @@
 
 import SwiftUI
 import Firebase
+import PhotosUI
 import Foundation
+import FirebaseFirestore
+import FirebaseFirestoreSwift
+import FirebaseStorage
 
 
 struct SignUpView: View {
     
     @State private var email = ""
     @State private var password = ""
+    @State var username = ""
+    @State var userProfilePic: Data?
+    
+    // Image picker
+    @State var showImagePicker = false
+    @State var photo: PhotosPickerItem?
     
     var body: some View {
         NavigationView
@@ -43,10 +53,48 @@ struct SignUpView: View {
                     Text("Sign Up")
                         .foregroundColor(.white)
                         .font(.system(size: 40, weight: .bold, design: .rounded))
-                        .offset(x: -100, y: -150)
+                        .offset(x: -100, y: -110)
+                    
+                    ZStack
+                    {
+                        if let userProfilePic, let image = UIImage(data: userProfilePic){
+                            Image(uiImage: image)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                        }
+                        else
+                        {
+                            Image("GeneralProfileImage")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                        }
+                        
+                    }
+                    .frame(width: 85, height: 85)
+                    .clipShape(Circle())
+                    .contentShape(Circle())
+                    .padding(.top, 5)
+                    .offset(y: -50)
+                    .onTapGesture {
+                        showImagePicker.toggle()
+                    }
+                    
+                    //username text field
+                    TextField("", text: $username)
+                        .foregroundColor(.white)
+                        .textFieldStyle(.plain)
+                        .placeholder(when: username.isEmpty) {
+                            Text("Username")
+                                .foregroundColor(.white)
+                                .bold()
+                        }
+                    
+                    Rectangle()
+                        .frame(width: 350, height: 1)
+                        .foregroundColor(.white)
                     
                     //email text field
-                    TextField("Email", text: $email)
+                    TextField("", text: $email)
                         .foregroundColor(.white)
                         .textFieldStyle(.plain)
                         .placeholder(when: email.isEmpty) {
@@ -59,7 +107,7 @@ struct SignUpView: View {
                         .frame(width: 350, height: 1)
                         .foregroundColor(.white)
                     
-                    SecureField("Password", text: $password)
+                    SecureField("", text: $password)
                         .foregroundColor(.white)
                         .textFieldStyle(.plain)
                         .placeholder(when: password.isEmpty){
@@ -71,6 +119,8 @@ struct SignUpView: View {
                     Rectangle()
                         .frame(width: 350, height: 1)
                         .foregroundColor(.white)
+                    
+                    
                     
                     Button
                     {
@@ -113,7 +163,7 @@ struct SignUpView: View {
                     NavigationLink(destination: LoginScreen()
                         .navigationBarBackButtonHidden(true))
                     {
-                        Text("Been here before?")
+                        Text("Already have an Account?\nLogin Now")
                             .foregroundColor(.white)
                             .bold()
                     }
@@ -126,6 +176,22 @@ struct SignUpView: View {
                 
             }
             .ignoresSafeArea()
+            .photosPicker(isPresented: $showImagePicker, selection: $photo)
+            .onChange(of: photo) { newValue in
+                if let newValue
+                {
+                    Task{
+                        do{
+                            guard let imageData = try await newValue.loadTransferable(type: Data.self) else {return}
+                            
+                            await MainActor.run(body: {
+                                userProfilePic = imageData
+                            })
+                            
+                        } catch {}
+                    }
+                }
+            }
             
         }
     }
@@ -133,7 +199,9 @@ struct SignUpView: View {
     func registerUser(email: String, password: String, completion: @escaping (AuthDataResult?, Error?) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
             completion(authResult, error)
+            
         }
+        
     }
 }
 

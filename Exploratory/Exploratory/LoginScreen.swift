@@ -55,7 +55,7 @@ struct LoginScreen: View {
                         .offset(x: -100, y: -150)
                     
                     //email text field
-                    TextField("Email", text: $email)
+                    TextField("", text: $email)
                         .foregroundColor(.white)
                         .textFieldStyle(.plain)
                         .placeholder(when: email.isEmpty) {
@@ -68,7 +68,7 @@ struct LoginScreen: View {
                         .frame(width: 350, height: 1)
                         .foregroundColor(.white)
                     
-                    SecureField("Password", text: $password)
+                    SecureField("", text: $password)
                         .foregroundColor(.white)
                         .textFieldStyle(.plain)
                         .placeholder(when: password.isEmpty){
@@ -130,7 +130,7 @@ struct LoginScreen: View {
                     NavigationLink(destination: SignUpView()
                         .navigationBarBackButtonHidden(true))
                     {
-                        Text("Sign Up")
+                        Text("Don't have an Account?\nRegister Now")
                             .foregroundColor(.white)
                             .bold()
                     }
