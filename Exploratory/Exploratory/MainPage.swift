@@ -83,8 +83,15 @@ struct MainPage: View {
                                 .cornerRadius(20)
                             }
                             .buttonStyle(TallButtonStyle())
-                            .sheet(isPresented: $showFriendsSheet) {
+                            .sheet(isPresented: $showFriendsSheet, onDismiss: {
+                                
+                                // set to false so we can open more sheets
+                                showFriendsSheet = false
+                            })
+                            {
+                                // Show the friends sheet
                                 FriendsView()
+                                
                             }
                             
                             Button(action: {
@@ -104,7 +111,13 @@ struct MainPage: View {
                                 .cornerRadius(20)
                             }
                             .buttonStyle(TallButtonStyle())
-                            .sheet(isPresented: $showHistorySheet) {
+                            .sheet(isPresented: $showHistorySheet, onDismiss: {
+                                // set to false so we can open more sheets
+                                showHistorySheet = false
+                                
+                            })
+                            {
+                                // Open the History view
                                 HistoryView()
                             }
                             
@@ -125,7 +138,11 @@ struct MainPage: View {
                                 .cornerRadius(20)
                             }
                             .buttonStyle(TallButtonStyle())
-                            .sheet(isPresented: $showStatsSheet) {
+                            .sheet(isPresented: $showStatsSheet, onDismiss: {
+                                // set to false so we can open more sheets
+                                showStatsSheet = false
+                            })
+                            {
                                 StatisticsView()
                             }
                             
@@ -147,8 +164,14 @@ struct MainPage: View {
                                 .cornerRadius(20)
                             }
                             .buttonStyle(TallButtonStyle())
-                            .sheet(isPresented: $showSettingsSheet) {
+                            .sheet(isPresented: $showSettingsSheet, onDismiss: {
+                                // set to false so we can open more sheets
+                                showSettingsSheet = false
+                            })
+                            {
+                                
                                 SettingsView()
+                                
                             }
                         }
                         .padding(.horizontal, 20)
