@@ -41,9 +41,12 @@ struct LoginScreen: View {
         {
             ZStack
             {
-                
+                // Black background
                 Color.black
                 
+                // MARK: Begin Formatting for Background
+                
+                // Gradient Rectangle for Formatting
                 RoundedRectangle(cornerRadius: 30, style: .continuous)
                     .foregroundStyle(.linearGradient(
                         colors: [
@@ -54,13 +57,15 @@ struct LoginScreen: View {
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
                     ))
-                    .frame(width: 1000, height: 450)
-                    .rotationEffect(.degrees(140))
-                    .offset(y: -350)
+                    .frame(width: 1000, height: 450) // Frame to encapsulate the text
+                    .rotationEffect(.degrees(140)) // Rotation
+                    .offset(y: -350) // Move to top of the screen
                 
                 VStack(spacing: 20)
                 {
                     
+                    // MARK: Text input for Users
+                    // Sign In Text
                     Text("Sign In")
                         .foregroundColor(.white)
                         .font(.system(size: 40, weight: .bold, design: .rounded))
@@ -94,13 +99,16 @@ struct LoginScreen: View {
                         .frame(width: 350, height: 1)
                         .foregroundColor(.white)
                     
+                    
+                    // MARK: Begin Login
+                    // Button for user to login
                     Button
                     {
-                        
                         //Function to Login
                         login()
                         
                     } label: {
+                        // login Text with background gradient same as the rounded rectangle
                         Text("Log in")
                             .bold()
                             .frame(width: 200, height: 40)
@@ -119,6 +127,7 @@ struct LoginScreen: View {
                     }
                     .padding(.top)
                     .offset(y: 100)
+                    // Alert for invalid email and/or password
                     .alert(isPresented: $showAlert) {
                                     Alert(
                                         title: Text("Error"),
@@ -128,10 +137,11 @@ struct LoginScreen: View {
                                 }
                     .fullScreenCover(isPresented: $showMainPage)
                     {
+                        // Show the main page 
                         MainPage()
                     }
                     
-                    
+                    // MARK: Navigation to Sign Up
                     
                     Button {
                         isSignUpShowing = true
@@ -150,20 +160,23 @@ struct LoginScreen: View {
                 }
                 .frame(width: 350)
                 
-                
-                
             }
             .ignoresSafeArea()
         }
+        // Show the loading wheel
         .overlay(content: {
             LoadingView(show: $isLoading)
         })
     }
     
+    
+    // MARK: Login Function
     func login() {
         
         isLoading = true
         
+        // MARK: User Authentication
+        // With error handling
         Auth.auth().signIn(withEmail: email, password: password) { _, error in
             if let error = error {
                 // Handle login error
@@ -180,7 +193,7 @@ struct LoginScreen: View {
     }
 }
 
-
+// MARK: Preview
 
 struct loginScreen_Previews: PreviewProvider {
     static var previews: some View {

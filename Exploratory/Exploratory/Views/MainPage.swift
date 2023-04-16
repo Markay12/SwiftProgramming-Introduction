@@ -10,6 +10,8 @@ import MapKit
 
 struct MainPage: View {
     
+    
+    
     @ObservedObject private var viewModel = MapViewModel()
     
     @State private var alert: Alert?
