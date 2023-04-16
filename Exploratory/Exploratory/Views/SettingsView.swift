@@ -12,6 +12,8 @@ struct SettingsView: View {
     
     // MARK: Setup variables for settings
     @State private var myProfile: User?
+    
+    // App storage data
     @AppStorage("log_status") var logStatus: Bool = false
     
     var body: some View {

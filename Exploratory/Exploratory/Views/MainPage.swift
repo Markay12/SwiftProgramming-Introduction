@@ -7,11 +7,15 @@
 
 import SwiftUI
 import MapKit
+import FirebaseAuth
 
 struct MainPage: View {
     
     // App Storage to get user information
+    @AppStorage("log_status") var logStatus: Bool = false
+    @AppStorage("user_profile_url") var profileURL: URL?
     @AppStorage("user_name") var usernameStored: String = ""
+    @AppStorage("user_UID") var userUID: String = ""
 
     @ObservedObject private var viewModel = MapViewModel()
     
@@ -53,7 +57,7 @@ struct MainPage: View {
                 .padding(.bottom, -50)
                 .overlay(
                     VStack(alignment: .leading) {
-                        Text("Welcome Back \(usernameStored)!")
+                        Text("Welcome Back!")
                             .font(.title)
                             .foregroundColor(.white)
                             .padding(.bottom, -2.5)
@@ -174,7 +178,7 @@ struct MainPage: View {
                             {
                                 
                                 SettingsView()
-                                
+
                             }
                         }
                         .padding(.horizontal, 20)

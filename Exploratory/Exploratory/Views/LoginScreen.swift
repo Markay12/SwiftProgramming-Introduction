@@ -14,7 +14,10 @@ import FirebaseAuth
 struct LoginScreen: View {
     
     // MARK: Setup Variables
-    
+    @AppStorage("log_status") var logStatus: Bool = false
+    @AppStorage("user_profile_url") var profileURL: URL?
+    @AppStorage("user_name") var usernameStored: String = ""
+    @AppStorage("user_UID") var userUID: String = ""
     
     // Email and password for login
     @State private var email = ""
@@ -189,9 +192,13 @@ struct LoginScreen: View {
                 print("Login error: \(error.localizedDescription)")
                 showAlert = true
                 isLoading = false
+                logStatus = false
             } else {
                 // Handle successful login
                 print("User logged in successfully")
+                
+                
+                logStatus = true
                 successfulLogin = true
                 showMainPage = true
             }
