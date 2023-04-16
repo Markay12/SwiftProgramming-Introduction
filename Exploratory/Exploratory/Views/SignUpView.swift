@@ -28,6 +28,15 @@ struct SignUpView: View {
     @State var showError: Bool = false
     @State var errorMessage: String = ""
     
+    @State private var isLoginSheetShowing = false
+    
+    
+    // User Defaults
+    @AppStorage("log_status") var logStatus: Bool = false
+    @AppStorage("user_profile_url") var profileURL: URL?
+    @AppStorage("user_name") var usernameStored: String = ""
+    @AppStorage("user_UID") var userUID: String = ""
+    
     var body: some View {
         NavigationView
         {
@@ -128,9 +137,10 @@ struct SignUpView: View {
                     Button
                     {
                         
-                        //if this button is clicked, register the user
+                        print("Sign up has been pressed")
                         
-                       
+                        //if this button is clicked, register the user
+                        registerUser()
                         
                         
                     } label: {
@@ -153,16 +163,26 @@ struct SignUpView: View {
                     }
                     .padding(.top)
                     .offset(y: 100)
-                    
-                    NavigationLink(destination: LoginScreen()
-                        .navigationBarBackButtonHidden(true))
+                    .fullScreenCover(isPresented: $logStatus)
                     {
+                        MainPage()
+                    }
+                    
+                    
+                    Button {
+                        isLoginSheetShowing = true
+                    } label: {
                         Text("Already have an Account?\nLogin Now")
                             .foregroundColor(.white)
                             .bold()
                     }
                     .padding(.top)
                     .offset(y: 110)
+                    .fullScreenCover(isPresented: $isLoginSheetShowing) {
+                        LoginScreen()
+                            .navigationBarBackButtonHidden(true)
+                    }
+                    
                 }
                 .frame(width: 350)
                 
@@ -185,6 +205,7 @@ struct SignUpView: View {
                         } catch {}
                     }
                 }
+                    
             }
             
         }
@@ -197,16 +218,36 @@ struct SignUpView: View {
             do
             {
                 // Create the Firebase account
-                let user = try await Auth.auth().createUser(withEmail: email, password: password)
+                try await Auth.auth().createUser(withEmail: email, password: password)
                 
                 // Upload Profile image
-                guard let userID = Auth.auth().currentUser?.uid else {return}
+                guard let userUID = Auth.auth().currentUser?.uid else {return}
                 guard let imageData = userProfilePic else {return}
-                let storageRef = Storage.storage().reference().child("Profile_Images").child(userID)
+                let storageRef = Storage.storage().reference().child("Profile_Images").child(userUID)
                 
                 let _ = try await storageRef.putDataAsync(imageData)
                 
+                
+                // Image URL
                 let downloadURL = try await storageRef.downloadURL()
+             
+                
+                // Create the user firestore object
+                let user = User(username: username, userID: userUID, userEmail: email, userProfileURL: downloadURL)
+                
+                // Save the user doc into firebase database
+                let _ = try Firestore.firestore().collection("Users").document(userUID).setData(from: user, completion: {
+                    error in
+                    if error == nil {
+                        //Saved Successfully
+                        print("User has been created and saved successfully.")
+                        usernameStored = username
+                        self.userUID = userUID
+                        profileURL = downloadURL
+                        logStatus = true
+                    }
+                })
+                
                 
             }
             catch

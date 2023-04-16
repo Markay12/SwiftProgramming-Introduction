@@ -18,6 +18,7 @@
 		7D57743429E60074006A5F7D /* MainPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D57743329E60074006A5F7D /* MainPage.swift */; };
 		7D66703329E8E131003700F5 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D66703229E8E131003700F5 /* MapViewModel.swift */; };
 		7D9C3ED629EB7DB7002AA26D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9C3ED529EB7DB7002AA26D /* User.swift */; };
+		7D9C3ED829EB8714002AA26D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9C3ED729EB8714002AA26D /* ContentView.swift */; };
 		7DC7926129EA4D9E0081987B /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7DC7926029EA4D9E0081987B /* FirebaseFirestoreSwift */; };
 		7DC7926329EA4D9E0081987B /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 7DC7926229EA4D9E0081987B /* FirebaseStorage */; };
 		7DD5B3F429E8E8A800D87C3C /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD5B3F329E8E8A800D87C3C /* Styles.swift */; };
@@ -38,6 +39,7 @@
 		7D57743329E60074006A5F7D /* MainPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPage.swift; sourceTree = "<group>"; };
 		7D66703229E8E131003700F5 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		7D9C3ED529EB7DB7002AA26D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		7D9C3ED729EB8714002AA26D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7DD5B3F329E8E8A800D87C3C /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
 		7DD5B3F529E8EE4800D87C3C /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
 		7DD5B3F729E8EE5200D87C3C /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
@@ -82,16 +84,9 @@
 			children = (
 				7D0E794029DCC5BE003771E6 /* ExploratoryApp.swift */,
 				7D57743129E5FE01006A5F7D /* GoogleService-Info.plist */,
-				7D0E794229DCC5BE003771E6 /* SignUpView.swift */,
-				7DD5B3F529E8EE4800D87C3C /* FriendsView.swift */,
 				7D9C3ED529EB7DB7002AA26D /* User.swift */,
-				7D66703229E8E131003700F5 /* MapViewModel.swift */,
+				7D9C3ED929EB8781002AA26D /* Views */,
 				7DD5B3F329E8E8A800D87C3C /* Styles.swift */,
-				7DD5B3F729E8EE5200D87C3C /* HistoryView.swift */,
-				7DD5B3F929E8EE5B00D87C3C /* StatisticsView.swift */,
-				7D57743329E60074006A5F7D /* MainPage.swift */,
-				7DD5B3FB29E8EE6400D87C3C /* SettingsView.swift */,
-				7D57742F29E5FCC6006A5F7D /* LoginScreen.swift */,
 				7D0E794429DCC5C0003771E6 /* Assets.xcassets */,
 				7D0E794629DCC5C0003771E6 /* Preview Content */,
 			);
@@ -104,6 +99,22 @@
 				7D0E794729DCC5C0003771E6 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		7D9C3ED929EB8781002AA26D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7D0E794229DCC5BE003771E6 /* SignUpView.swift */,
+				7DD5B3F529E8EE4800D87C3C /* FriendsView.swift */,
+				7D9C3ED729EB8714002AA26D /* ContentView.swift */,
+				7D66703229E8E131003700F5 /* MapViewModel.swift */,
+				7DD5B3F729E8EE5200D87C3C /* HistoryView.swift */,
+				7DD5B3F929E8EE5B00D87C3C /* StatisticsView.swift */,
+				7D57743329E60074006A5F7D /* MainPage.swift */,
+				7DD5B3FB29E8EE6400D87C3C /* SettingsView.swift */,
+				7D57742F29E5FCC6006A5F7D /* LoginScreen.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		7DC7925F29EA4D9E0081987B /* Frameworks */ = {
@@ -195,6 +206,7 @@
 			files = (
 				7DD5B3F629E8EE4800D87C3C /* FriendsView.swift in Sources */,
 				7DD5B3F829E8EE5200D87C3C /* HistoryView.swift in Sources */,
+				7D9C3ED829EB8714002AA26D /* ContentView.swift in Sources */,
 				7D0E794329DCC5BE003771E6 /* SignUpView.swift in Sources */,
 				7D66703329E8E131003700F5 /* MapViewModel.swift in Sources */,
 				7DD5B3FA29E8EE5B00D87C3C /* StatisticsView.swift in Sources */,
