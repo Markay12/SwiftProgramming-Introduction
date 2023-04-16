@@ -21,12 +21,15 @@ struct SignUpView: View {
     @State var username: String =  ""
     @State var userProfilePic: Data?
     
+    @State var isLoading: Bool = false
+    
     // Image picker
     @State var showImagePicker: Bool = false
     @State var photo: PhotosPickerItem?
     
     @State var showError: Bool = false
     @State var errorMessage: String = ""
+    
     
     @State private var isLoginSheetShowing = false
     
@@ -190,6 +193,9 @@ struct SignUpView: View {
                 
             }
             .ignoresSafeArea()
+            .overlay(content: {
+                LoadingView(show: $isLoading)
+            })
             .photosPicker(isPresented: $showImagePicker, selection: $photo)
             .onChange(of: photo) { newValue in
                 if let newValue
@@ -207,12 +213,14 @@ struct SignUpView: View {
                 }
                     
             }
+            .alert(errorMessage, isPresented: $showError, actions: {})
             
         }
     }
     
     func registerUser()
     {
+        isLoading = true
         Task
         {
             do
@@ -264,6 +272,7 @@ struct SignUpView: View {
         await MainActor.run(body: {
             errorMessage = error.localizedDescription
             showError.toggle()
+            isLoading = false
         })
         
     }
