@@ -16,6 +16,9 @@ struct LoginScreen: View {
     @State private var email = ""
     @State private var password = ""
     
+    // sign up screen showing
+    @State var isSignUpShowing: Bool = false
+    
     // generic alert for login
     @State private var showAlert = false
     
@@ -113,29 +116,26 @@ struct LoginScreen: View {
                                         dismissButton: .default(Text("OK"))
                                     )
                                 }
-                    
-                    if showMainPage {
-                        NavigationLink(
-                            destination: MainPage()
-                                .navigationBarBackButtonHidden(true)
-                                ,
-                            isActive: $showMainPage) {
-                                EmptyView()
-                                
-                        }
+                    .fullScreenCover(isPresented: $showMainPage)
+                    {
+                        MainPage()
                     }
                     
                     
                     
-                    NavigationLink(destination: SignUpView()
-                        .navigationBarBackButtonHidden(true))
-                    {
+                    Button {
+                        isSignUpShowing = true
+                    } label: {
                         Text("Don't have an Account?\nRegister Now")
                             .foregroundColor(.white)
                             .bold()
                     }
                     .padding(.top)
                     .offset(y: 110)
+                    .fullScreenCover(isPresented: $isSignUpShowing) {
+                        SignUpView()
+                            .navigationBarBackButtonHidden(true)
+                    }
                     
                 }
                 .frame(width: 350)
