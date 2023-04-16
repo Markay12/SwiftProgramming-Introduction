@@ -13,6 +13,9 @@ import FirebaseAuth
 
 struct LoginScreen: View {
     
+    // MARK: Setup Variables
+    
+    // Email and password for login
     @State private var email = ""
     @State private var password = ""
     
@@ -22,10 +25,16 @@ struct LoginScreen: View {
     // generic alert for login
     @State private var showAlert = false
     
-    @State private var successfulLogin = false
+    // Successful login state
+    @State private var successfulLogin: Bool = false
     
     // Variable to show the main page
-    @State private var showMainPage = false
+    @State private var showMainPage: Bool = false
+    
+    // Variable for loading
+    @State var isLoading: Bool = false
+    
+    // MARK: Begin View
     
     var body: some View {
         NavigationView
@@ -61,6 +70,7 @@ struct LoginScreen: View {
                     TextField("", text: $email)
                         .foregroundColor(.white)
                         .textFieldStyle(.plain)
+                        .textContentType(.emailAddress)
                         .placeholder(when: email.isEmpty) {
                             Text("Email")
                                 .foregroundColor(.white)
@@ -145,23 +155,29 @@ struct LoginScreen: View {
             }
             .ignoresSafeArea()
         }
+        .overlay(content: {
+            LoadingView(show: $isLoading)
+        })
     }
     
     func login() {
-            Auth.auth().signIn(withEmail: email, password: password) { _, error in
-                if let error = error {
-                    // Handle login error
-                    print("Login error: \(error.localizedDescription)")
-                    showAlert = true
-                } else {
-                    // Handle successful login
-                    print("User logged in successfully")
-                    successfulLogin = true
-                    showMainPage = true
-                }
+        
+        isLoading = true
+        
+        Auth.auth().signIn(withEmail: email, password: password) { _, error in
+            if let error = error {
+                // Handle login error
+                print("Login error: \(error.localizedDescription)")
+                showAlert = true
+                isLoading = false
+            } else {
+                // Handle successful login
+                print("User logged in successfully")
+                successfulLogin = true
+                showMainPage = true
             }
         }
-    
+    }
 }
 
 

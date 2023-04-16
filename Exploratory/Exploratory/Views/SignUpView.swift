@@ -166,10 +166,6 @@ struct SignUpView: View {
                     }
                     .padding(.top)
                     .offset(y: 100)
-                    .fullScreenCover(isPresented: $logStatus)
-                    {
-                        MainPage()
-                    }
                     
                     
                     Button {
