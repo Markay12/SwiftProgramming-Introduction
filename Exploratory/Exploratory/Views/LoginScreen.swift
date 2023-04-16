@@ -15,6 +15,7 @@ struct LoginScreen: View {
     
     // MARK: Setup Variables
     
+    
     // Email and password for login
     @State private var email = ""
     @State private var password = ""
@@ -169,11 +170,16 @@ struct LoginScreen: View {
         })
     }
     
+    func closeKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+    
     
     // MARK: Login Function
     func login() {
         
         isLoading = true
+        closeKeyboard()
         
         // MARK: User Authentication
         // With error handling

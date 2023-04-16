@@ -214,9 +214,15 @@ struct SignUpView: View {
         }
     }
     
+    func closeKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+    
     func registerUser()
     {
         isLoading = true
+        closeKeyboard()
+        
         Task
         {
             do

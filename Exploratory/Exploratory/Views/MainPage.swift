@@ -10,8 +10,9 @@ import MapKit
 
 struct MainPage: View {
     
-    
-    
+    // App Storage to get user information
+    @AppStorage("user_name") var usernameStored: String = ""
+
     @ObservedObject private var viewModel = MapViewModel()
     
     @State private var alert: Alert?
@@ -52,7 +53,7 @@ struct MainPage: View {
                 .padding(.bottom, -50)
                 .overlay(
                     VStack(alignment: .leading) {
-                        Text("Welcome Back!")
+                        Text("Welcome Back \(usernameStored)!")
                             .font(.title)
                             .foregroundColor(.white)
                             .padding(.bottom, -2.5)
