@@ -16,14 +16,17 @@ import FirebaseStorage
 
 struct SignUpView: View {
     
-    @State private var email = ""
-    @State private var password = ""
-    @State var username = ""
+    @State private var email: String =  ""
+    @State private var password: String =  ""
+    @State var username: String =  ""
     @State var userProfilePic: Data?
     
     // Image picker
-    @State var showImagePicker = false
+    @State var showImagePicker: Bool = false
     @State var photo: PhotosPickerItem?
+    
+    @State var showError: Bool = false
+    @State var errorMessage: String = ""
     
     var body: some View {
         NavigationView
@@ -127,16 +130,7 @@ struct SignUpView: View {
                         
                         //if this button is clicked, register the user
                         
-                        registerUser(email: email, password: password) { authResult, error in
-                            if let error = error {
-                                // Handle registration error
-                                print("Registration error: \(error.localizedDescription)")
-                            } else if let authResult = authResult {
-                                // Handle successful registration
-                                let user = authResult.user
-                                print("User registered successfully: \(user.uid)")
-                            }
-                        }
+                       
                         
                         
                     } label: {
@@ -196,11 +190,40 @@ struct SignUpView: View {
         }
     }
     
-    func registerUser(email: String, password: String, completion: @escaping (AuthDataResult?, Error?) -> Void) {
-        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-            completion(authResult, error)
-            
+    func registerUser()
+    {
+        Task
+        {
+            do
+            {
+                // Create the Firebase account
+                let user = try await Auth.auth().createUser(withEmail: email, password: password)
+                
+                // Upload Profile image
+                guard let userID = Auth.auth().currentUser?.uid else {return}
+                guard let imageData = userProfilePic else {return}
+                let storageRef = Storage.storage().reference().child("Profile_Images").child(userID)
+                
+                let _ = try await storageRef.putDataAsync(imageData)
+                
+                let downloadURL = try await storageRef.downloadURL()
+                
+            }
+            catch
+            {
+                await setError(error)
+            }
         }
+        
+    }
+    
+    func setError(_ error: Error) async {
+        
+        // MARK: UI updated on the main thread
+        await MainActor.run(body: {
+            errorMessage = error.localizedDescription
+            showError.toggle()
+        })
         
     }
 }
