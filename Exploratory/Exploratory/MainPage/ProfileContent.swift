@@ -9,6 +9,8 @@ import Foundation
 import SwiftUI
 import SDWebImageSwiftUI
 
+
+
 struct ProfileContent: View {
     
     var user: User
@@ -67,6 +69,10 @@ struct ProfileContent: View {
                     .foregroundColor(.black)
                     .hAlign(.leading)
                     .padding(.vertical, 15)
+                
+                // MARK: Section of Locations
+                
+                
             }
             .padding(15)
         }

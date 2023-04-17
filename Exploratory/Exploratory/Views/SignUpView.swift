@@ -21,6 +21,7 @@ struct SignUpView: View {
     @State var username: String =  ""
     @State var userProfilePic: Data?
     
+    
     @State var isLoading: Bool = false
     
     // Image picker
@@ -31,7 +32,7 @@ struct SignUpView: View {
     @State var errorMessage: String = ""
     
     
-    @State private var isLoginSheetShowing = false
+    @State private var isLoginSheetShowing: Bool = false
     
     
     // User Defaults
@@ -62,7 +63,7 @@ struct SignUpView: View {
                     .rotationEffect(.degrees(140))
                     .offset(y: -350)
                 
-                VStack(spacing: 20)
+                VStack(spacing: 10)
                 {
                     
                     Text("Sign Up")
@@ -131,9 +132,11 @@ struct SignUpView: View {
                                 .bold()
                         }
                     
+                    
                     Rectangle()
                         .frame(width: 350, height: 1)
                         .foregroundColor(.white)
+                    
                     
                     
                     

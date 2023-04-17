@@ -64,6 +64,8 @@ struct SettingsView: View {
                     }
                 }
             }
+            
+            
         }
         .overlay{
             LoadingView(show: $isLoading)
