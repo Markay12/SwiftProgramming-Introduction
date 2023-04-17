@@ -32,7 +32,7 @@ struct SettingsView: View {
             {
                 if let myProfile
                 {
-                    ProfileContent(user: myProfile)
+                    PersonalProfileContent(user: myProfile)
                         .refreshable {
                             // MARK: Refresh the User Data
                             self.myProfile = nil
