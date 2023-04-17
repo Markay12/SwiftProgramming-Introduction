@@ -88,13 +88,11 @@
 		7D0E793F29DCC5BE003771E6 /* Exploratory */ = {
 			isa = PBXGroup;
 			children = (
-				7D5FA9DE29EC7CDA00CC15FB /* MainPage */,
 				7D0E794029DCC5BE003771E6 /* ExploratoryApp.swift */,
-				7D57743129E5FE01006A5F7D /* GoogleService-Info.plist */,
-				7D9C3ED529EB7DB7002AA26D /* User.swift */,
+				7D5FA9EA29ECFEC900CC15FB /* Firebase */,
+				7D5FA9DE29EC7CDA00CC15FB /* MainPage */,
+				7D5FA9E929ECFEB000CC15FB /* Structures */,
 				7D9C3ED929EB8781002AA26D /* Views */,
-				7DD5B3F329E8E8A800D87C3C /* Styles.swift */,
-				7D0E794429DCC5C0003771E6 /* Assets.xcassets */,
 				7D0E794629DCC5C0003771E6 /* Preview Content */,
 			);
 			path = Exploratory;
@@ -103,6 +101,7 @@
 		7D0E794629DCC5C0003771E6 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				7D0E794429DCC5C0003771E6 /* Assets.xcassets */,
 				7D0E794729DCC5C0003771E6 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
@@ -120,6 +119,23 @@
 				7DD5B3FB29E8EE6400D87C3C /* SettingsView.swift */,
 			);
 			path = MainPage;
+			sourceTree = "<group>";
+		};
+		7D5FA9E929ECFEB000CC15FB /* Structures */ = {
+			isa = PBXGroup;
+			children = (
+				7DD5B3F329E8E8A800D87C3C /* Styles.swift */,
+				7D9C3ED529EB7DB7002AA26D /* User.swift */,
+			);
+			path = Structures;
+			sourceTree = "<group>";
+		};
+		7D5FA9EA29ECFEC900CC15FB /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				7D57743129E5FE01006A5F7D /* GoogleService-Info.plist */,
+			);
+			path = Firebase;
 			sourceTree = "<group>";
 		};
 		7D9C3ED929EB8781002AA26D /* Views */ = {

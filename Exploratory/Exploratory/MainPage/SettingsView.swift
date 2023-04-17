@@ -33,17 +33,16 @@ struct SettingsView: View {
                 if let myProfile
                 {
                     ProfileContent(user: myProfile)
+                        .refreshable {
+                            // MARK: Refresh the User Data
+                            self.myProfile = nil
+                            await fetchUserData()
+                        }
                 }
                 else
                 {
                     MainPage()
                 }
-            }
-            // Make the user data able to be refreshed
-            .refreshable {
-                // MARK: Refresh the user Data
-                myProfile = nil //set user data to nil, then refresh
-                await fetchUserData()
             }
             .navigationTitle("My Profile")
             .toolbar {
