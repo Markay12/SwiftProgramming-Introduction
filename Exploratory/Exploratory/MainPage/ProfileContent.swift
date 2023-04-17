@@ -9,11 +9,23 @@ import Foundation
 import SwiftUI
 import SDWebImageSwiftUI
 
+// Import Location data for user
+import CoreLocation
+import MapKit
 
 
 struct ProfileContent: View {
     
+    // MARK: Declare variables
+    @State private var location = Location(city: "", state: "", country: "")
+
     var user: User
+    
+    // To track user location
+    @State private var locationManager = CLLocationManager()
+    
+    //String for city
+
     
     var body: some View {
 
@@ -55,35 +67,84 @@ struct ProfileContent: View {
                     
                 }
                 
-                Text("User Locations")
+                Section(header: Text("User Locations")
                     .font(.title2)
                     .fontWeight(.semibold)
                     .foregroundColor(.black)
                     .hAlign(.leading)
                     .padding(.vertical, 15)
-                
-                // Add current user location
-                Text("Current Location")
-                    .font(.title3)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.black)
-                    .hAlign(.leading)
-                    .padding(.vertical, 15)
-                
-                // MARK: Section of Locations
-                
+                ) {
+                    Group {
+                        Text("Current Location")
+                            .font(.title3)
+                            .underline()
+                            .fontWeight(.semibold)
+                            .foregroundColor(.black)
+                            .hAlign(.leading)
+                            .padding(.vertical, 15)
+                        
+                        if location.city.isEmpty {
+                            Text("Location not available")
+                                .font(.title3)
+                                .fontWeight(.semibold)
+                                .foregroundColor(.black)
+                                .hAlign(.leading)
+                                .padding(.vertical, 15)
+                        } else {
+                            VStack(alignment: .leading, spacing: 6) {
+                                Text(location.city)
+                                    .fontWeight(.semibold)
+                                
+                                Text("\(location.state), \(location.country)")
+                                    .foregroundColor(.gray)
+                            }
+                            .hAlign(.leading)
+                            .padding(.vertical, 15)
+                        }
+                    }
+                }
+
                 
             }
             .padding(15)
         }
+        .onAppear {
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.startUpdatingLocation()
+            reverseGeocode()
+        }
+
+
+
         
 
     }
+    
+    func reverseGeocode() {
+        if let location = locationManager.location {
+            CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
+                if let placemark = placemarks?.first {
+                    let city = placemark.locality ?? ""
+                    let state = placemark.administrativeArea ?? ""
+                    let country = placemark.country ?? ""
+                    self.location = Location(city: city, state: state, country: country)
+                }
+            }
+        }
+    }
+
+
     
 
     
 }
 
 
+
+struct Location {
+    var city: String
+    var state: String
+    var country: String
+}
 
 
