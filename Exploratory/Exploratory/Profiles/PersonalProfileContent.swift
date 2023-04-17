@@ -1,8 +1,8 @@
 //
-//  ProfileContent.swift
+//  PersonalProfileContent.swift
 //  Exploratory
 //
-//  Created by Mark Ashinhust on 4/16/23.
+//  Created by Mark Ashinhust on 4/17/23.
 //
 
 import Foundation
@@ -14,7 +14,7 @@ import CoreLocation
 import MapKit
 
 
-struct ProfileContent: View {
+struct PersonalProfileContent: View {
     
     // MARK: Declare variables
     @State private var location = Location(city: "", state: "", country: "")
@@ -138,7 +138,6 @@ struct ProfileContent: View {
 
     
 }
-
 
 
 struct Location {
