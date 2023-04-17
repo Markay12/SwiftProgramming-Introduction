@@ -24,13 +24,16 @@ struct ProfileContent: View {
                     // MARK: Display user image
                     WebImage(url: user.userProfileURL).placeholder
                     {
+
                         // Placeholder Image for the user
                         Image("GeneralProfileImage")
                             .resizable()
+                            
                     }
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 100, height: 100)
                     .clipShape(Circle())
+                    
                     
                     // MARK: User text and information
                     VStack(alignment: .leading, spacing: 6)

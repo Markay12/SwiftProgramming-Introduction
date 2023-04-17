@@ -233,9 +233,16 @@ struct SignUpView: View {
                 // Upload Profile image
                 guard let userUID = Auth.auth().currentUser?.uid else {return}
                 guard let imageData = userProfilePic else {return}
+                
+                // Scale image to 150x150 view
+                let image = UIImage(data: imageData)
+                let scaledImage = image?.resized(to: CGSize(width: 40, height: 40))
+                let scaledImageData = scaledImage?.jpegData(compressionQuality: 3) ?? imageData
+                           
+                
                 let storageRef = Storage.storage().reference().child("Profile_Images").child(userUID)
                 
-                let _ = try await storageRef.putDataAsync(imageData)
+                let _ = try await storageRef.putDataAsync(scaledImageData)
                 
                 
                 // Image URL
@@ -301,6 +308,16 @@ extension View {
         }
     }
 }
+
+extension UIImage {
+    func resized(to size: CGSize) -> UIImage? {
+        let renderer = UIGraphicsImageRenderer(size: size)
+        return renderer.image { _ in
+            self.draw(in: CGRect(origin: .zero, size: size))
+        }
+    }
+}
+
 
 // Extension to use hex colors
 extension Color {
