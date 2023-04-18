@@ -117,6 +117,7 @@ struct SignUpView: View {
                     TextField("", text: $email)
                         .foregroundColor(.white)
                         .textFieldStyle(.plain)
+                        .textInputAutocapitalization(.none)
                         .placeholder(when: email.isEmpty) {
                             Text("Email")
                                 .foregroundColor(.white)
@@ -257,7 +258,7 @@ struct SignUpView: View {
              
                 
                 // Create the user firestore object
-                let user = User(username: username, userID: userUID, userEmail: email, userProfileURL: downloadURL)
+                let user = User(username: username, userID: userUID, userEmail: email, userProfileURL: downloadURL, userBio: "New Exploratory User")
                 
                 // Save the user doc into firebase database
                 let _ = try Firestore.firestore().collection("Users").document(userUID).setData(from: user, completion: {

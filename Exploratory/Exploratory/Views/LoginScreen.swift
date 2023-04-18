@@ -87,6 +87,7 @@ struct LoginScreen: View {
                         .foregroundColor(.white)
                         .textFieldStyle(.plain)
                         .textContentType(.emailAddress)
+                        .textInputAutocapitalization(.none)
                         .placeholder(when: email.isEmpty) {
                             Text("Email")
                                 .foregroundColor(.white)

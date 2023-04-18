@@ -30,7 +30,7 @@ struct SettingsView: View {
         {
             VStack
             {
-                if let myProfile
+                if let myProfile = myProfile
                 {
                     PersonalProfileContent(user: myProfile)
                         .refreshable {
@@ -39,10 +39,7 @@ struct SettingsView: View {
                             await fetchUserData()
                         }
                 }
-                else
-                {
-                    MainPage()
-                }
+                
             }
             .navigationTitle("My Profile")
             .toolbar {

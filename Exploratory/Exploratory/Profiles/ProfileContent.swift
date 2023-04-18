@@ -40,10 +40,10 @@ struct ProfileContent: View {
                             .font(.title3)
                             .fontWeight(.semibold)
                         
-                        Text(user.userEmail)
+                        Text(user.userBio)
                             .font(.caption)
                             .foregroundColor(.gray)
-                            .lineLimit(1)
+                            .lineLimit(3)
                                                 
                     }
                     .hAlign(.leading)

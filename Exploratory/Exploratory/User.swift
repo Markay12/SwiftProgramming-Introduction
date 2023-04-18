@@ -24,6 +24,6 @@ struct User: Identifiable, Codable {
         case userID
         case userEmail
         case userProfileURL
-        case bio
+        case userBio
     }
 }

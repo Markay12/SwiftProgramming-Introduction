@@ -12,20 +12,26 @@ import SDWebImageSwiftUI
 // Import Location data for user
 import CoreLocation
 import MapKit
-
+import FirebaseFirestore
+import FirebaseAuth
 
 struct PersonalProfileContent: View {
     
     // MARK: Declare variables
     @State private var location = Location(city: "", state: "", country: "")
-
+    @State private var bioText = ""
+    
+    @State private var showAlert = false
+        
+    // Maximum number of characters allowed in bio
+    let maxBioLength = 140
+    
     var user: User
     
     // To track user location
     @State private var locationManager = CLLocationManager()
     
     //String for city
-
     
     var body: some View {
 
@@ -61,6 +67,11 @@ struct PersonalProfileContent: View {
                             .font(.caption)
                             .foregroundColor(.gray)
                             .lineLimit(1)
+                        
+                        Text(user.userBio)
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                            .lineLimit(4)
                                                 
                     }
                     .hAlign(.leading)
@@ -104,7 +115,40 @@ struct PersonalProfileContent: View {
                         }
                     }
                 }
-
+                
+                Section(header: Text("Personal Bio")
+                    .font(.title2)
+                    .underline()
+                    .fontWeight(.semibold)
+                    .foregroundColor(.black)
+                    .hAlign(.leading)
+                    .padding(.vertical, 15)
+                ) {
+                    VStack(alignment: .leading, spacing: 6) {
+                        TextField("Enter your personal bio...", text: $bioText)
+                            .textFieldStyle(.roundedBorder)
+                        
+                        HStack {
+                            Spacer()
+                            Button("Save") {
+                                
+                                print(bioText.count)
+                                
+                                if bioText.count > maxBioLength {
+                                    
+                                
+                                    showAlert = true
+                                } else {
+                                    saveBio()
+                                }
+                            }
+                            .buttonStyle(.borderless)
+                            .controlSize(.small)
+                            .offset(y: -100)
+                        }
+                    }
+                    .padding(.vertical, 15)
+                }
                 
             }
             .padding(15)
@@ -114,12 +158,16 @@ struct PersonalProfileContent: View {
             locationManager.startUpdatingLocation()
             reverseGeocode()
         }
-
-
-
+        .alert(isPresented: $showAlert) {
+                Alert(
+                    title: Text("Bio too long"),
+                    message: Text("Your bio can't exceed \(maxBioLength) characters."),
+                    dismissButton: .default(Text("OK"))
+                )
+            }
         
-
     }
+
     
     func reverseGeocode() {
         if let location = locationManager.location {
@@ -133,12 +181,27 @@ struct PersonalProfileContent: View {
             }
         }
     }
-
-
     
+    func saveBio() {
+        
+        // Update the bio in Firebase Firestore
+        guard let userUID = Auth.auth().currentUser?.uid else {return}
+        let db = Firestore.firestore()
+        let userRef = db.collection("Users").document(userUID)
+        userRef.updateData([
+            "userBio": bioText
+        ]) { error in
+            if let error = error {
+                print("Error updating user bio: \(error.localizedDescription)")
+            } else {
+                print("User bio updated successfully")
+            }
+        }
+    }
 
     
 }
+
 
 
 struct Location {
@@ -151,7 +214,7 @@ struct Location {
 
 struct PersonalProfileContent_Previews: PreviewProvider {
     static var previews: some View {
-        MainPage()
+        LoginScreen()
     }
 }
 
