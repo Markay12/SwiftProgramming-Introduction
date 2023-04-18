@@ -20,12 +20,10 @@ struct FriendsView: View {
      
         NavigationStack
         {
-            //List for the users
+            // MARK: User List
             List {
                 ForEach(fetchedUsers) { user in
-                    NavigationLink {
-                        
-                    } label: {
+                    NavigationLink(destination: ProfileContent(user: user)) {
                         Text(user.username)
                             .font(.callout)
                             .hAlign(.leading)
@@ -34,11 +32,12 @@ struct FriendsView: View {
                 
             }
             .listStyle(.plain)
-            // Navigation title and information
+            // MARK: Navigation Information
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("Search for a User")
             .searchable(text: $searchText)
             .onSubmit(of: .search, {
+                
                 // MARK: Fetch user from Firebase
                 Task {
                     await searchUsers()
@@ -53,30 +52,32 @@ struct FriendsView: View {
         }
         
     }
-    func searchUsers() async
-    {
+    
+    // MARK: Search user function
+    
+    func searchUsers() async {
         do {
-            
+            let searchTextLowercased = searchText.lowercased() // Convert search text to lowercase
             let documents = try await Firestore.firestore().collection("Users")
-                .whereField("username", isGreaterThanOrEqualTo: searchText)
-                .whereField("username", isLessThanOrEqualTo: "\(searchText)\u{f8ff}")
+                .whereField("username", isGreaterThanOrEqualTo: searchTextLowercased)
+                .whereField("username", isLessThanOrEqualTo: "\(searchTextLowercased)\u{f8ff}")
                 .getDocuments()
             
-            // User information
             let users = try documents.documents.compactMap { doc -> User? in
                 try doc.data(as: User.self)
             }
             
-            // on Main thread
-            await MainActor.run(body: {
+            await MainActor.run {
                 fetchedUsers = users
-            })
-        }
-        catch {
+            }
+        } catch {
             print(error.localizedDescription)
         }
     }
+
 }
+
+
 
 struct FriendsView_Previews: PreviewProvider {
     static var previews: some View {

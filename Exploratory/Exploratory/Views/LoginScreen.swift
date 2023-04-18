@@ -51,29 +51,36 @@ struct LoginScreen: View {
                 // MARK: Begin Formatting for Background
                 
                 // Gradient Rectangle for Formatting
-                RoundedRectangle(cornerRadius: 30, style: .continuous)
-                    .foregroundStyle(.linearGradient(
-                        colors: [
-                            Color(hex: 0xfcbf49),
-                            Color(hex: 0xd62828),
-                            Color(hex: 0xeae2b7)
-                        ],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    ))
-                    .frame(width: 1000, height: 450) // Frame to encapsulate the text
-                    .rotationEffect(.degrees(140)) // Rotation
-                    .offset(y: -350) // Move to top of the screen
+                Circle()
+                        .foregroundStyle(.linearGradient(
+                            colors: [
+                                Color(hex: 0x02198B),
+                                Color(hex: 0x253DA1),
+                                Color(hex: 0xB0DBF1)
+                            ],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        ))
+                        .frame(width: 450, height: 450)
+                        .rotationEffect(.degrees(-20)) // Rotation to follow the bottom circle
+                        .offset(y: -350) // Move to top of the screen
+                
                 
                 VStack(spacing: 20)
                 {
                     
                     // MARK: Text input for Users
+                    
+                    Text("Exploratory")
+                        .foregroundColor(.white)
+                        .font(.system(size: 40, weight: .bold, design: .rounded))
+                        .offset(x: -60, y: -150)
+                    
                     // Sign In Text
                     Text("Sign In")
                         .foregroundColor(.white)
-                        .font(.system(size: 40, weight: .bold, design: .rounded))
-                        .offset(x: -100, y: -150)
+                        .font(.system(size: 24, weight: .bold, design: .rounded))
+                        .offset(x: -126, y: -170)
                     
                     //email text field
                     TextField("", text: $email)
@@ -113,15 +120,15 @@ struct LoginScreen: View {
                         
                     } label: {
                         // login Text with background gradient same as the rounded rectangle
-                        Text("Log in")
+                        Text("Sign in")
                             .bold()
                             .frame(width: 200, height: 40)
                             .background(
                                 RoundedRectangle(cornerRadius: 10, style: .continuous)
                                     .fill(.linearGradient(
                                         colors: [
-                                            Color(hex: 0xc1121f),
-                                            Color(hex: 0xd62828)
+                                            Color(hex: 0x02198B),
+                                            Color(hex: 0x253DA1)
                                         ],
                                         startPoint: .topLeading,
                                         endPoint: .bottomTrailing
@@ -164,13 +171,19 @@ struct LoginScreen: View {
                 }
                 .frame(width: 350)
                 
+                
+                
             }
             .ignoresSafeArea()
+            
+            
         }
         // Show the loading wheel
         .overlay(content: {
             LoadingView(show: $isLoading)
         })
+        
+        
     }
     
     func closeKeyboard() {

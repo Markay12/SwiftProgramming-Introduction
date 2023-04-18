@@ -57,13 +57,6 @@ struct ProfileContent: View {
                     .hAlign(.leading)
                     .padding(.vertical, 15)
                 
-                // Add current user location
-                Text("Current Location")
-                    .font(.title3)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.black)
-                    .hAlign(.leading)
-                    .padding(.vertical, 15)
             }
             .padding(15)
         }

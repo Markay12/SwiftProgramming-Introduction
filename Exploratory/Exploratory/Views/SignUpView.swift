@@ -49,19 +49,23 @@ struct SignUpView: View {
                 
                 Color.black
                 
-                RoundedRectangle(cornerRadius: 30, style: .continuous)
-                    .foregroundStyle(.linearGradient(
-                        colors: [
-                            Color(hex: 0xC1121F),
-                            Color(hex: 0xf77f00),
-                            Color(hex: 0xfcbf49)
-                        ],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    ))
-                    .frame(width: 1000, height: 450)
-                    .rotationEffect(.degrees(140))
-                    .offset(y: -350)
+                Circle()
+                        .foregroundStyle(.linearGradient(
+                            colors: [
+                                Color(hex: 0xC1121F),
+                                Color(hex: 0xf77f00),
+                                Color(hex: 0xfcbf49)
+                            ],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        ))
+                        .frame(width: 450, height: 450)
+                        .rotationEffect(.degrees(-20)) // Rotation to follow the bottom circle
+                        .offset(y: -300) // Move to top of the screen
+                
+                
+
+                
                 
                 VStack(spacing: 10)
                 {
@@ -100,7 +104,7 @@ struct SignUpView: View {
                         .foregroundColor(.white)
                         .textFieldStyle(.plain)
                         .placeholder(when: username.isEmpty) {
-                            Text("Username")
+                            Text("Full Name")
                                 .foregroundColor(.white)
                                 .bold()
                         }

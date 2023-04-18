@@ -100,6 +100,7 @@ struct PersonalProfileContent: View {
                             }
                             .hAlign(.leading)
                             .padding(.vertical, 15)
+                            .offset(y: -20)
                         }
                     }
                 }
@@ -146,4 +147,11 @@ struct Location {
     var country: String
 }
 
+
+
+struct PersonalProfileContent_Previews: PreviewProvider {
+    static var previews: some View {
+        MainPage()
+    }
+}
 
