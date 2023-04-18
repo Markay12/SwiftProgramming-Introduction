@@ -54,19 +54,22 @@ struct FriendsView: View {
     }
     
     // MARK: Search user function
-    
     func searchUsers() async {
         do {
             let searchTextLowercased = searchText.lowercased() // Convert search text to lowercase
+
             let documents = try await Firestore.firestore().collection("Users")
-                .whereField("username", isGreaterThanOrEqualTo: searchTextLowercased)
-                .whereField("username", isLessThanOrEqualTo: "\(searchTextLowercased)\u{f8ff}")
+                .whereField("username", isEqualTo: searchText)
                 .getDocuments()
             
+            print(documents)
+
             let users = try documents.documents.compactMap { doc -> User? in
                 try doc.data(as: User.self)
             }
             
+            print(users)
+
             await MainActor.run {
                 fetchedUsers = users
             }
@@ -74,6 +77,9 @@ struct FriendsView: View {
             print(error.localizedDescription)
         }
     }
+
+
+
 
 }
 
