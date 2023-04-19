@@ -35,27 +35,51 @@ struct MainPage: View {
     @State private var showHistorySheet = false
     @State private var showStatsSheet = false
     @State private var showSettingsSheet = false
+    
+    init()
+    {
+        viewModel.checkIfLocationServicesEnabled()
+        viewModel.startUpdatingLocation()
+        listenForLocationChanges()
+    }
 
     
     var body: some View {
         ZStack(alignment: .bottom) {
+            
+            
+            
             Map(coordinateRegion: $viewModel.region, showsUserLocation: true)
                 .ignoresSafeArea()
                 .accentColor(Color.orange)
                 .alert(item: $viewModel.alert) { alert in
                     alert.alert
                 }
-                .onAppear {
-                    viewModel.checkIfLocationServicesEnabled()
-                    
-                    // Slow down visual map updates
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
-                        viewModel.startUpdatingLocation() // start updating the user's location after a 5 second delay
-                        listenForLocationChanges()
-                    }
-
-                }
                 .offset(y: -200)
+                .overlay(
+                
+                    HStack(spacing: 10) {
+                            if let weather = viewModel.weather {
+                                Text("\(Int(weather.main.temp))°F")
+                                    .foregroundColor(.black)
+                                    .font(.title)
+
+                                Text(weather.weather.first?.description.capitalized ?? "")
+                                    .foregroundColor(.black)
+                                    .font(.caption)
+
+                                Image(systemName: "cloud.fill")
+                                    .foregroundColor(.black)
+                                    .font(.system(size: 30))
+                            }
+                        }
+                        .offset(y: -20)
+                        .padding()
+                )
+            
+            
+            
+
             
             Rectangle()
                 .fill(Color.black)
@@ -65,6 +89,8 @@ struct MainPage: View {
                 .padding(.bottom, -50)
                 .overlay(
                     VStack(alignment: .leading) {
+                        
+                        
                         Text("Welcome Back!")
                             .font(.title)
                             .foregroundColor(.white)

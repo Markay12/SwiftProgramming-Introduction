@@ -24,6 +24,9 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     @Published var region = MKCoordinateRegion(center: MapDetails.startingLocation,
                                                span: MapDetails.defaultSpan)
     
+    // To Gather weather data
+    @Published var weather: WeatherModel?
+    
     // Need location manager to use maps
     // Optional value in case the user has their location services turned off
     var locationManager:  CLLocationManager?
@@ -128,8 +131,40 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last else { return }
+        
+        guard let location = locations.last else {
+            return
+        }
+        
         region.center = location.coordinate
+        
+        // Fetch weather data for added API to map
+        fetchWeatherData()
+    }
+
+
+    // Fetch Weather Data using an API call
+    func fetchWeatherData() {
+        guard let location = locationManager?.location else {
+            return
+        }
+        
+        
+        let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?lat=\(location.coordinate.latitude)&lon=\(location.coordinate.longitude)&appid=6521050e50e6c401fd678f41ebaebdce&units=imperial")!
+                
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let data = data {
+                do {
+                    let decoder = JSONDecoder()
+                    let weatherData = try decoder.decode(WeatherModel.self, from: data)
+                    DispatchQueue.main.async {
+                        self.weather = weatherData
+                    }
+                } catch let error {
+                    print("Error decoding weather data: \(error.localizedDescription)")
+                }
+            }
+        }.resume()
     }
 
     
