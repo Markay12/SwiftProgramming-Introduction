@@ -8,6 +8,7 @@
 import SwiftUI
 import MapKit
 import FirebaseAuth
+import FirebaseDatabase
 
 struct MainPage: View {
     
@@ -46,6 +47,13 @@ struct MainPage: View {
                 }
                 .onAppear {
                     viewModel.checkIfLocationServicesEnabled()
+                    
+                    // Slow down visual map updates
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
+                        viewModel.startUpdatingLocation() // start updating the user's location after a 5 second delay
+                        listenForLocationChanges()
+                    }
+
                 }
                 .offset(y: -200)
             
@@ -190,6 +198,39 @@ struct MainPage: View {
         }
     }
     
+    // Save user's location data to Realtime Database
+    func saveLocation(latitude: Double, longitude: Double) {
+        guard let userUID = Auth.auth().currentUser?.uid else {
+            return
+        }
+        
+        let locationRef = Database.database().reference().child("locations").child(userUID)
+        locationRef.setValue(["latitude": latitude, "longitude": longitude])
+    }
+    
+    // Listen for user's location data changes in Realtime Database
+    func listenForLocationChanges() {
+        guard let userUID = Auth.auth().currentUser?.uid else {
+            return
+        }
+
+        let locationRef = Database.database().reference().child("locations").child(userUID)
+
+        locationRef.observe(.value) { snapshot in
+            DispatchQueue.global(qos: .background).async {
+                guard let locationData = snapshot.value as? [String: Double],
+                    let latitude = locationData["latitude"],
+                    let longitude = locationData["longitude"] else {
+                        return
+                }
+
+                // Update user's location on the map
+                DispatchQueue.main.async {
+                    viewModel.updateUserLocation(latitude: latitude, longitude: longitude)
+                }
+            }
+        }
+    }
 }
 
 
@@ -212,6 +253,9 @@ extension View {
             .disabled(condition)
             .opacity(condition ? 0.6 : 1)
     }
+    
+    
+
     
 }
 

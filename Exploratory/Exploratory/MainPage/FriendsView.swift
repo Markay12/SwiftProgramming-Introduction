@@ -56,8 +56,6 @@ struct FriendsView: View {
     // MARK: Search user function
     func searchUsers() async {
         do {
-            let searchTextLowercased = searchText.lowercased() // Convert search text to lowercase
-
             let documents = try await Firestore.firestore().collection("Users")
                 .whereField("username", isEqualTo: searchText)
                 .getDocuments()

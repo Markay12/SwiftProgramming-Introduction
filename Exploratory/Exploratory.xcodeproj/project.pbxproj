@@ -18,6 +18,8 @@
 		7D57743429E60074006A5F7D /* MainPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D57743329E60074006A5F7D /* MainPage.swift */; };
 		7D5FA9E029EC7CFF00CC15FB /* ProfileContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5FA9DF29EC7CFF00CC15FB /* ProfileContent.swift */; };
 		7D5FA9E329EC7E5000CC15FB /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 7D5FA9E229EC7E5000CC15FB /* SDWebImageSwiftUI */; };
+		7D611B2829EF9A510023668F /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 7D611B2729EF9A510023668F /* FirebaseDatabase */; };
+		7D611B2A29EF9A510023668F /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7D611B2929EF9A510023668F /* FirebaseDatabaseSwift */; };
 		7D66703329E8E131003700F5 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D66703229E8E131003700F5 /* MapViewModel.swift */; };
 		7D9013FC29EDB78B00514762 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9013FB29EDB78B00514762 /* User.swift */; };
 		7D9013FE29EDB7A000514762 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9013FD29EDB7A000514762 /* Styles.swift */; };
@@ -59,6 +61,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D611B2A29EF9A510023668F /* FirebaseDatabaseSwift in Frameworks */,
+				7D611B2829EF9A510023668F /* FirebaseDatabase in Frameworks */,
 				7D5FA9E329EC7E5000CC15FB /* SDWebImageSwiftUI in Frameworks */,
 				7D57742C29E5FC8D006A5F7D /* FirebaseAuth in Frameworks */,
 				7DC7926329EA4D9E0081987B /* FirebaseStorage in Frameworks */,
@@ -173,6 +177,8 @@
 				7DC7926029EA4D9E0081987B /* FirebaseFirestoreSwift */,
 				7DC7926229EA4D9E0081987B /* FirebaseStorage */,
 				7D5FA9E229EC7E5000CC15FB /* SDWebImageSwiftUI */,
+				7D611B2729EF9A510023668F /* FirebaseDatabase */,
+				7D611B2929EF9A510023668F /* FirebaseDatabaseSwift */,
 			);
 			productName = Exploratory;
 			productReference = 7D0E793D29DCC5BE003771E6 /* Exploratory.app */;
@@ -485,6 +491,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7D5FA9E129EC7E5000CC15FB /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
+		};
+		7D611B2729EF9A510023668F /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7D57742A29E5FC8D006A5F7D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		7D611B2929EF9A510023668F /* FirebaseDatabaseSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7D57742A29E5FC8D006A5F7D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabaseSwift;
 		};
 		7DC7926029EA4D9E0081987B /* FirebaseFirestoreSwift */ = {
 			isa = XCSwiftPackageProductDependency;
