@@ -40,7 +40,7 @@ struct ProfileContent: View {
                             .font(.title3)
                             .fontWeight(.semibold)
                         
-                        Text(user.userBio)
+                        Text("Bio: \(user.userBio)")
                             .font(.caption)
                             .foregroundColor(.gray)
                             .lineLimit(3)
