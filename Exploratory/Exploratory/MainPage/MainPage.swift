@@ -22,6 +22,9 @@ struct MainPage: View {
     
     @State private var alert: Alert?
     
+    @State var timer: Timer?
+
+    
     public func showAlert(_ alert: Alert) {
         self.alert = alert
     }
@@ -220,6 +223,14 @@ struct MainPage: View {
 
                     }
                         .padding()
+                        .onAppear
+                    {
+                        startTimer()
+                    }
+                        .onDisappear
+                    {
+                        stopTimer()
+                    }
                 )
         }
     }
@@ -232,6 +243,45 @@ struct MainPage: View {
         
         let locationRef = Database.database().reference().child("locations").child(userUID)
         locationRef.setValue(["latitude": latitude, "longitude": longitude])
+    }
+    
+    // MARK: Update Statistics Function for the User
+    func updateStatistics() {
+        guard let userUID = Auth.auth().currentUser?.uid else {
+            return
+        }
+
+        let statisticsRef = Database.database().reference().child("statistics").child(userUID)
+
+        statisticsRef.observeSingleEvent(of: .value) { snapshot in
+            var statistics = Statistics(citiesVisited: 0, countriesVisited: 0, distanceTraveled: 0)
+
+            if let data = snapshot.value as? [String: Any],
+               let citiesVisited = data["citiesVisited"] as? Int,
+               let countriesVisited = data["countriesVisited"] as? Int,
+               let distanceTraveled = data["distanceTraveled"] as? Double {
+                statistics = Statistics(citiesVisited: citiesVisited, countriesVisited: countriesVisited, distanceTraveled: distanceTraveled)
+            }
+
+            // Update the statistics data with the new information
+            statistics.citiesVisited += 1
+            // Update other properties as needed
+
+            // Save the updated statistics data to the database
+            let statisticsData = try! JSONEncoder().encode(statistics)
+            statisticsRef.setValue(try! JSONSerialization.jsonObject(with: statisticsData) as! [String: Any])
+        }
+    }
+    
+        
+    func startTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
+            updateStatistics()
+        }
+    }
+    
+    func stopTimer() {
+        timer?.invalidate()
     }
     
     // Listen for user's location data changes in Realtime Database

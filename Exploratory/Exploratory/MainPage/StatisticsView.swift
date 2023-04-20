@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+import FirebaseAuth
+import FirebaseDatabase
+import FirebaseFirestore
 
 struct StatisticsView: View {
     @ObservedObject var viewModel = StatisticsViewModel()
@@ -54,6 +57,9 @@ struct StatisticsView: View {
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarHidden(false)
     }
+    
+    
+
 }
 
 
