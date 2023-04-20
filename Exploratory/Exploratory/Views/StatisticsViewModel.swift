@@ -9,9 +9,9 @@ import Foundation
 
 
 class StatisticsViewModel: ObservableObject {
-    @Published var citiesVisited: Int = 0
-    @Published var countriesVisited: Int = 0
-    @Published var distanceTraveled: Double = 0
+    @Published var citiesVisited = 15
+    @Published var countriesVisited = 2
+    @Published var distanceTraveled = 121.668
 
     init() {
         fetchTravelHistory()

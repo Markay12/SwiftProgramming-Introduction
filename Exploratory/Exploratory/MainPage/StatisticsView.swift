@@ -11,7 +11,7 @@ import FirebaseDatabase
 import FirebaseFirestore
 
 struct StatisticsView: View {
-    @ObservedObject var viewModel = StatisticsViewModel()
+    @ObservedObject var statsViewModel = StatisticsViewModel()
 
     var body: some View {
         VStack {
@@ -22,7 +22,7 @@ struct StatisticsView: View {
 
             VStack {
                 VStack {
-                    Text("\(viewModel.citiesVisited)")
+                    Text("\(statsViewModel.citiesVisited)")
                         .font(.title)
                         .fontWeight(.bold)
                         .padding()
@@ -32,7 +32,7 @@ struct StatisticsView: View {
                 }
                 Spacer()
                 VStack {
-                    Text("\(viewModel.countriesVisited)")
+                    Text("\(statsViewModel.countriesVisited)")
                         .font(.title)
                         .fontWeight(.bold)
                         .padding()
@@ -42,7 +42,7 @@ struct StatisticsView: View {
                 }
                 Spacer()
                 VStack {
-                    Text(String(format: "%.2f", viewModel.distanceTraveled) + " km")
+                    Text(String(format: "%.2f", statsViewModel.distanceTraveled) + " km")
                         .font(.title)
                         .fontWeight(.bold)
                         .padding()
@@ -56,11 +56,13 @@ struct StatisticsView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarHidden(false)
+        .onReceive(statsViewModel.objectWillChange) { _ in
+            // Update the view when the citiesVisited value changes
+            // You can do the same for the other properties if needed
+        }
     }
-    
-    
-
 }
+
 
 
 // MARK: Structure for Statistics
