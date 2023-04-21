@@ -62,25 +62,28 @@ struct MainPage: View {
                 }
                 .offset(y: -200)
                 .overlay(
-                
-                    HStack(spacing: 10) {
-                            if let weather = viewModel.weather {
-                                Text("\(Int(weather.main.temp))°F")
-                                    .foregroundColor(.black)
-                                    .font(.title)
+                    VStack(spacing: 10) {
+                        if let weather = viewModel.weather {
+                            Text("\(Int(weather.main.temp))°F")
+                                .foregroundColor(.black)
+                                .font(.title)
 
-                                Text(weather.weather.first?.description.capitalized ?? "")
-                                    .foregroundColor(.black)
-                                    .font(.caption)
+                            Text(weather.weather.first?.description.capitalized ?? "")
+                                .foregroundColor(.black)
+                                .font(.caption)
 
-                                Image(systemName: "cloud.fill")
-                                    .foregroundColor(.black)
-                                    .font(.system(size: 30))
-                            }
+                            Image(systemName: "cloud.fill")
+                                .foregroundColor(.black)
+                                .font(.system(size: 30))
                         }
-                        .offset(y: -20)
-                        .padding()
+                    }
+                    .padding()
+                    .background(Color.white.opacity(0.8))
+                    .cornerRadius(10)
+                    .offset(y: -20)
+                    , alignment: .top
                 )
+
             
             
             

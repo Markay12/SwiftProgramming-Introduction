@@ -23,6 +23,7 @@ struct SignUpView: View {
     
     
     @State var isLoading: Bool = false
+    @State var isStarting: Bool = false
     
     // Image picker
     @State var showImagePicker: Bool = false
@@ -62,9 +63,26 @@ struct SignUpView: View {
                         .frame(width: 450, height: 450)
                         .rotationEffect(.degrees(-20)) // Rotation to follow the bottom circle
                         .offset(y: -300) // Move to top of the screen
+                        // Add spin animation
+                        .rotationEffect(Angle(degrees: isStarting ? 360 : 0)) // Add spin animation
+                        .animation(.linear(duration: 2.0)) // Duration for animation
                 
-                
-
+                Circle()
+                        .foregroundStyle(.linearGradient(
+                            colors: [
+                                Color(hex: 0xC1121F),
+                                Color(hex: 0xf77f00),
+                                Color(hex: 0xfcbf49)
+                            ],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        ))
+                        .frame(width: 450, height: 450)
+                        .rotationEffect(.degrees(-20)) // Rotation to follow the bottom circle
+                        .offset(y: 325) // Move to top of the screen
+                        // Add spin animation
+                        .rotationEffect(Angle(degrees: isStarting ? 360 : 0)) // Add spin animation
+                        .animation(.linear(duration: 2.0)) // Duration for animation
                 
                 
                 VStack(spacing: 10)
@@ -162,9 +180,11 @@ struct SignUpView: View {
                                 RoundedRectangle(cornerRadius: 10, style: .continuous)
                                     .fill(.linearGradient(
                                         colors: [
+                                            Color(hex: 0x000000),
                                             Color(hex: 0xC1121F),
                                             Color(hex: 0xf77f00),
-                                            Color(hex: 0xfcbf49)
+                                            Color(hex: 0xfcbf49),
+                                            Color(hex: 0x000000)
                                         ],
                                         startPoint: .topLeading,
                                         endPoint: .bottomTrailing
@@ -197,6 +217,13 @@ struct SignUpView: View {
                 
             }
             .ignoresSafeArea()
+            .onAppear {
+                // Call the animation function when the view appears
+                isStarting = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    isStarting = false
+                }
+            }
             .overlay(content: {
                 LoadingView(show: $isLoading)
             })

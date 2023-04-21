@@ -37,6 +37,7 @@ struct LoginScreen: View {
     
     // Variable for loading
     @State var isLoading: Bool = false
+    @State var isStarting: Bool = false
     
     // MARK: Begin View
     
@@ -64,6 +65,26 @@ struct LoginScreen: View {
                         .frame(width: 450, height: 450)
                         .rotationEffect(.degrees(-20)) // Rotation to follow the bottom circle
                         .offset(y: -350) // Move to top of the screen
+                        // Add spin animation
+                        .rotationEffect(Angle(degrees: isStarting ? 360 : 0)) // Add spin animation
+                        .animation(.linear(duration: 2.0)) // Duration for animation
+                
+                Circle()
+                        .foregroundStyle(.linearGradient(
+                            colors: [
+                                Color(hex: 0x02198B),
+                                Color(hex: 0x253DA1),
+                                Color(hex: 0xB0DBF1)
+                            ],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        ))
+                        .frame(width: 450, height: 450)
+                        .rotationEffect(.degrees(-20)) // Rotation to follow the bottom circle
+                        .offset(y: 325) // Move to top of the screen
+                        // Add spin animation
+                        .rotationEffect(Angle(degrees: isStarting ? 360 : 0)) // Add spin animation
+                        .animation(.linear(duration: 2.0)) // Duration for animation
                 
                 
                 VStack(spacing: 20)
@@ -128,8 +149,10 @@ struct LoginScreen: View {
                                 RoundedRectangle(cornerRadius: 10, style: .continuous)
                                     .fill(.linearGradient(
                                         colors: [
+                                            Color(hex: 0x000000),
                                             Color(hex: 0x02198B),
-                                            Color(hex: 0x253DA1)
+                                            Color(hex: 0x253DA1),
+                                            Color(hex: 0x000000)
                                         ],
                                         startPoint: .topLeading,
                                         endPoint: .bottomTrailing
@@ -176,6 +199,13 @@ struct LoginScreen: View {
                 
             }
             .ignoresSafeArea()
+            .onAppear {
+                // Call the animation function when the view appears
+                isStarting = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    isStarting = false
+                }
+            }
             
             
         }
