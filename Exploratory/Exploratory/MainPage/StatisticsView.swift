@@ -10,16 +10,23 @@ import FirebaseAuth
 import FirebaseDatabase
 import FirebaseFirestore
 
-struct StatisticsView: View {
-    @ObservedObject var statsViewModel = StatisticsViewModel()
+// MARK: Structure for Statistics
+struct Statistics: Codable {
+    var citiesVisited: Int
+    var countriesVisited: Int
+    var distanceTraveled: Double
+}
 
+struct StatisticsView: View {
+    @StateObject var statsViewModel = StatisticsViewModel()
+    
     var body: some View {
         VStack {
             Text("Statistics")
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .padding()
-
+            
             VStack {
                 VStack {
                     Text("\(statsViewModel.citiesVisited)")
@@ -56,19 +63,6 @@ struct StatisticsView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarHidden(false)
-        .onReceive(statsViewModel.objectWillChange) { _ in
-            // Update the view when the citiesVisited value changes
-            // You can do the same for the other properties if needed
-        }
     }
-}
-
-
-
-// MARK: Structure for Statistics
-struct Statistics: Codable {
-    var citiesVisited: Int
-    var countriesVisited: Int
-    var distanceTraveled: Double
 }
 
