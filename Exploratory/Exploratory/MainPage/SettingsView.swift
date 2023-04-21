@@ -15,6 +15,9 @@ struct SettingsView: View {
     // MARK: Setup variables for settings
     @State private var myProfile: User?
     
+    // Add Statistics
+    @StateObject private var statisticsViewModel = StatisticsViewModel()
+    
     // App storage data
     @AppStorage("log_status") var logStatus: Bool = false
     
@@ -38,6 +41,13 @@ struct SettingsView: View {
                             self.myProfile = nil
                             await fetchUserData()
                         }
+                    
+                    VStack {
+                        Text("Cities Visited: \(statisticsViewModel.citiesVisited)")
+                        Text("Countries Visited: \(statisticsViewModel.countriesVisited)")
+                        Text("Distance Traveled: \(statisticsViewModel.distanceTraveled, specifier: "%.2f") km")
+                    }
+
                 }
                 
             }
