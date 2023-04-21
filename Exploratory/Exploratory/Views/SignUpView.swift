@@ -271,8 +271,8 @@ struct SignUpView: View {
                 
                 // Scale image to 150x150 view
                 let image = UIImage(data: imageData)
-                let scaledImage = image?.resized(to: CGSize(width: 40, height: 40))
-                let scaledImageData = scaledImage?.jpegData(compressionQuality: 0.8) ?? imageData
+                let scaledImage = image?.resized(to: CGSize(width: 150, height: 150))
+                let scaledImageData = scaledImage?.jpegData(compressionQuality: 1.0) ?? imageData
                            
                 
                 let storageRef = Storage.storage().reference().child("Profile_Images").child(userUID)

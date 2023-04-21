@@ -21,13 +21,15 @@ struct PersonalProfileContent: View {
     @State private var location = Location(city: "", state: "", country: "")
     @State private var bioText = ""
     
+    @StateObject private var statisticsViewModel = StatisticsViewModel()
+    
+    
     @State private var showAlert = false
         
     // Maximum number of characters allowed in bio
     let maxBioLength = 140
     
     var user: User
-    
     // To track user location
     @State private var locationManager = CLLocationManager()
     
@@ -72,6 +74,20 @@ struct PersonalProfileContent: View {
                             .font(.caption)
                             .foregroundColor(.gray)
                             .lineLimit(4)
+                        
+                        
+                        Text("Cities Visited: \(statisticsViewModel.citiesVisited)")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                        Text("Countries Visited:\(statisticsViewModel.countriesVisited)")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+
+                        Text("Distance Traveled: \(statisticsViewModel.distanceTraveled,specifier: "%.2f") km")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+
+                        
                                                 
                     }
                     .hAlign(.leading)
@@ -131,15 +147,14 @@ struct PersonalProfileContent: View {
                         HStack {
                             Spacer()
                             Button("Save") {
-                                
-                                print(bioText.count)
-                                
+                                                                
                                 if bioText.count > maxBioLength {
                                     
                                 
                                     showAlert = true
                                 } else {
                                     saveBio()
+                                    
                                 }
                             }
                             .buttonStyle(.borderless)
@@ -181,6 +196,11 @@ struct PersonalProfileContent: View {
             }
         }
     }
+    //MARK: Hide the Keyboard
+    
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
     
     func saveBio() {
         
@@ -190,10 +210,13 @@ struct PersonalProfileContent: View {
         let userRef = db.collection("Users").document(userUID)
         userRef.updateData([
             "userBio": bioText
+            
         ]) { error in
             if let error = error {
                 print("Error updating user bio: \(error.localizedDescription)")
             } else {
+                hideKeyboard()
+                bioText = ""
                 print("User bio updated successfully")
             }
         }

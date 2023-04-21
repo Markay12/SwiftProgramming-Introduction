@@ -19,6 +19,7 @@ struct Statistics: Codable {
 
 struct StatisticsView: View {
     @StateObject var statsViewModel = StatisticsViewModel()
+    
 
     var body: some View {
         VStack {

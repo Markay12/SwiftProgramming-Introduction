@@ -44,6 +44,18 @@ struct ProfileContent: View {
                             .font(.caption)
                             .foregroundColor(.gray)
                             .lineLimit(3)
+                        
+                        Text("Visited Cities: \(user.citiesVisited)")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                            
+                        Text("Visited Countries: \(user.countriesVisited)")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                        
+                        Text("Distance Traveled: \(user.distanceTraveled)")
+                            .font(.caption)
+                            .foregroundColor(.gray)
                                                 
                     }
                     .hAlign(.leading)

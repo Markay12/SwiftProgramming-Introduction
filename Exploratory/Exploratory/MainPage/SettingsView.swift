@@ -42,11 +42,9 @@ struct SettingsView: View {
                             await fetchUserData()
                         }
                     
-                    VStack {
-                        Text("Cities Visited: \(statisticsViewModel.citiesVisited)")
-                        Text("Countries Visited: \(statisticsViewModel.countriesVisited)")
-                        Text("Distance Traveled: \(statisticsViewModel.distanceTraveled, specifier: "%.2f") km")
-                    }
+                    
+
+                    
 
                 }
                 
@@ -102,6 +100,9 @@ struct SettingsView: View {
         })
         
     }
+    
+    
+
     
     // MARK: Logout Function
     func logout()
