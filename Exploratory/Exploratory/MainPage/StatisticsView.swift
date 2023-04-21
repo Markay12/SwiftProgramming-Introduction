@@ -19,14 +19,14 @@ struct Statistics: Codable {
 
 struct StatisticsView: View {
     @StateObject var statsViewModel = StatisticsViewModel()
-    
+
     var body: some View {
         VStack {
             Text("Statistics")
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .padding()
-            
+
             VStack {
                 VStack {
                     Text("\(statsViewModel.citiesVisited)")
@@ -63,6 +63,10 @@ struct StatisticsView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarHidden(false)
+        .onAppear {
+            statsViewModel.fetchStats()
+        }
     }
 }
+
 

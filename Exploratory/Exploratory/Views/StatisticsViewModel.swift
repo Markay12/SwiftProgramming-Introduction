@@ -9,6 +9,8 @@ import CoreLocation
 import Foundation
 import FirebaseDatabase
 import FirebaseAuth
+import FirebaseFirestore
+import Combine
 
 class StatisticsViewModel: NSObject, ObservableObject {
     @Published var citiesVisited = 0
@@ -35,6 +37,41 @@ class StatisticsViewModel: NSObject, ObservableObject {
         fetchTravelHistory()
     }
     
+    func fetchStats() {
+        guard let currentUser = Auth.auth().currentUser else { return }
+
+        let db = Firestore.firestore()
+        let docRef = db.collection("statistics").document(currentUser.uid)
+
+        docRef.getDocument { (document, error) in
+            if let error = error {
+                print("Error fetching statistics: \(error)")
+            } else if let document = document, document.exists {
+                if let data = document.data() {
+                    do {
+                        let jsonData = try JSONSerialization.data(withJSONObject: data, options: [])
+                        let stats = try JSONDecoder().decode(Statistics.self, from: jsonData)
+                        DispatchQueue.main.async {
+                            self.citiesVisited = stats.citiesVisited
+                            self.countriesVisited = stats.countriesVisited
+                            self.distanceTraveled = stats.distanceTraveled
+                        }
+                    } catch let error {
+                        print("Error decoding statistics: \(error)")
+                    }
+                } else {
+                    print("Document does not exist")
+                }
+            } else {
+                print("Document does not exist")
+            }
+        }
+    }
+
+
+
+    
+    
     private func fetchTravelHistory() {
         guard let userId = userId else { return }
         let travelHistoryRef = databaseRef.child("users").child(userId).child("travelHistory")
@@ -50,23 +87,37 @@ class StatisticsViewModel: NSObject, ObservableObject {
     
     private func updateTravelHistory() {
         guard let userId = userId else { return }
-        let travelHistoryRef = databaseRef.child("users").child(userId).child("travelHistory")
         
+        // Update travel history in Realtime Database
+        let travelHistoryRef = databaseRef.child("users").child(userId).child("travelHistory")
         let travelHistoryDict: [String: Any] = [
             "citiesVisited": citiesVisited,
             "countriesVisited": countriesVisited,
             "distanceTraveled": distanceTraveled
         ]
-        
         travelHistoryRef.setValue(travelHistoryDict) { [weak self] (error, _) in
-            guard error == nil, let self = self else { return }
+            guard error == nil else { return }
             
             // Update the view when the data is written to the database
             DispatchQueue.main.async {
-                self.fetchTravelHistory()
+                self?.fetchTravelHistory()
+            }
+        }
+        
+        // Update travel history in Firestore
+        let db = Firestore.firestore()
+        let userRef = db.collection("Users").document(userId)
+        userRef.updateData([
+            "citiesVisited": citiesVisited,
+            "countriesVisited": countriesVisited,
+            "distanceTraveled": distanceTraveled
+        ]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
             }
         }
     }
+
     
     private func updateDistanceTraveled(to newLocation: CLLocation) {
         guard let previousLocation = previousLocation else {
