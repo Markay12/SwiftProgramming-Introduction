@@ -285,7 +285,7 @@ struct SignUpView: View {
              
                 
                 // Create the user firestore object
-                let user = User(username: username, userID: userUID, userEmail: email, userProfileURL: downloadURL, userBio: "New Exploratory User")
+                let user = User(username: username, userID: userUID, userEmail: email, userProfileURL: downloadURL, userBio: "New Exploratory User", citiesVisited: 0, countriesVisited: 0, distanceTraveled: 0.0)
                 
                 // Save the user doc into firebase database
                 let _ = try Firestore.firestore().collection("Users").document(userUID).setData(from: user, completion: {
