@@ -272,7 +272,7 @@ struct SignUpView: View {
                 // Scale image to 150x150 view
                 let image = UIImage(data: imageData)
                 let scaledImage = image?.resized(to: CGSize(width: 40, height: 40))
-                let scaledImageData = scaledImage?.jpegData(compressionQuality: 3) ?? imageData
+                let scaledImageData = scaledImage?.jpegData(compressionQuality: 0.8) ?? imageData
                            
                 
                 let storageRef = Storage.storage().reference().child("Profile_Images").child(userUID)
@@ -345,13 +345,27 @@ extension View {
 }
 
 extension UIImage {
-    func resized(to size: CGSize) -> UIImage? {
-        let renderer = UIGraphicsImageRenderer(size: size)
-        return renderer.image { _ in
-            self.draw(in: CGRect(origin: .zero, size: size))
+    func resized(to targetSize: CGSize) -> UIImage? {
+        let widthRatio  = targetSize.width  / size.width
+        let heightRatio = targetSize.height / size.height
+        
+        let newSize: CGSize
+        if widthRatio > heightRatio {
+            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+        } else {
+            newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
         }
+        
+        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
     }
 }
+
 
 
 // Extension to use hex colors
