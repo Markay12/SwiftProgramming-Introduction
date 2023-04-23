@@ -41,11 +41,6 @@ struct SettingsView: View {
                             self.myProfile = nil
                             await fetchUserData()
                         }
-                    
-                    
-
-                    
-
                 }
                 
             }

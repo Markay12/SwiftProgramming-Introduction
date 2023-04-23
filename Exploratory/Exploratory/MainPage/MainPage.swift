@@ -53,25 +53,32 @@ struct MainPage: View {
         ZStack(alignment: .bottom) {
             
             
-            
+            // MARK: Begin Showing Map
+            // This code is creating a Map view with the region as a binding variable, and showing the user's location
             Map(coordinateRegion: $viewModel.region, showsUserLocation: true)
                 .ignoresSafeArea()
                 .accentColor(Color.orange)
+                // Alert is displayed if the viewModel.alert value is set
                 .alert(item: $viewModel.alert) { alert in
                     alert.alert
                 }
+    
+                // The entire Map view is offset by -200 in the y-axis
                 .offset(y: -200)
+    
+                // A VStack overlay is added to the Map view
                 .overlay(
                     VStack(spacing: 10) {
+                        // If the viewModel.weather value is not nil,       temperature, weather description, and a cloud icon     are displayed
                         if let weather = viewModel.weather {
                             Text("\(Int(weather.main.temp))°F")
                                 .foregroundColor(.black)
                                 .font(.title)
-
-                            Text(weather.weather.first?.description.capitalized ?? "")
+    
+                            Text(weather.weather.first?.description.capitalized     ?? "")
                                 .foregroundColor(.black)
                                 .font(.caption)
-
+    
                             Image(systemName: "cloud.fill")
                                 .foregroundColor(.black)
                                 .font(.system(size: 30))
@@ -84,8 +91,9 @@ struct MainPage: View {
                     , alignment: .top
                 )
 
+
             
-            
+            // MARK: Begin UI Rectangles
             
 
             
@@ -233,6 +241,7 @@ struct MainPage: View {
         }
     }
     
+    // MARK: Svae Location to DB
     // Save user's location data to Realtime Database
     func saveLocation(latitude: Double, longitude: Double) {
         guard let userUID = Auth.auth().currentUser?.uid else {
@@ -244,6 +253,7 @@ struct MainPage: View {
     }
     
     
+    // MARK: Listen for Changes
     // Listen for user's location data changes in Realtime Database
     func listenForLocationChanges() {
         guard let userUID = Auth.auth().currentUser?.uid else {
