@@ -13,9 +13,10 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 import FirebaseStorage
 
-
+// MARK: Begin Sign Up View
 struct SignUpView: View {
     
+    // MARK: Declaration of Variables
     @State private var email: String =  ""
     @State private var password: String =  ""
     @State var username: String =  ""
@@ -42,6 +43,7 @@ struct SignUpView: View {
     @AppStorage("user_name") var usernameStored: String = ""
     @AppStorage("user_UID") var userUID: String = ""
     
+    // MARK: Begin Main View
     var body: some View {
         NavigationView
         {
@@ -50,6 +52,7 @@ struct SignUpView: View {
                 
                 Color.black
                 
+                // MARK: Login Visuals
                 Circle()
                         .foregroundStyle(.linearGradient(
                             colors: [
@@ -85,6 +88,7 @@ struct SignUpView: View {
                         .animation(.linear(duration: 2.0)) // Duration for animation
                 
                 
+                // MARK: Begin Log In Text
                 VStack(spacing: 10)
                 {
                     
@@ -117,6 +121,7 @@ struct SignUpView: View {
                         showImagePicker.toggle()
                     }
                     
+                    // MARK: Text Fields
                     //username text field
                     TextField("", text: $username)
                         .foregroundColor(.white)
@@ -162,7 +167,7 @@ struct SignUpView: View {
                     
                     
                     
-                    
+                    // MARK: Sign Up Buttons
                     Button
                     {
                         
@@ -195,7 +200,7 @@ struct SignUpView: View {
                     .padding(.top)
                     .offset(y: 100)
                     
-                    
+                    // MARK: GOTO Login
                     Button {
                         isLoginSheetShowing = true
                     } label: {
@@ -213,8 +218,6 @@ struct SignUpView: View {
                 }
                 .frame(width: 350)
                 
-                
-                
             }
             .ignoresSafeArea()
             .onAppear {
@@ -227,6 +230,7 @@ struct SignUpView: View {
             .overlay(content: {
                 LoadingView(show: $isLoading)
             })
+            // MARK: Image Picker
             .photosPicker(isPresented: $showImagePicker, selection: $photo)
             .onChange(of: photo) { newValue in
                 if let newValue
@@ -249,10 +253,12 @@ struct SignUpView: View {
         }
     }
     
+    // MARK: Close Keyboard Function
     func closeKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
     
+    // MARK: Register User Function
     func registerUser()
     {
         isLoading = true
@@ -274,7 +280,7 @@ struct SignUpView: View {
                 let scaledImage = image?.resized(to: CGSize(width: 150, height: 150))
                 let scaledImageData = scaledImage?.jpegData(compressionQuality: 1.0) ?? imageData
                            
-                
+                // MARK: Storage
                 let storageRef = Storage.storage().reference().child("Profile_Images").child(userUID)
                 
                 let _ = try await storageRef.putDataAsync(scaledImageData)
@@ -285,7 +291,7 @@ struct SignUpView: View {
              
                 
                 // Create the user firestore object
-                let user = User(username: username, userID: userUID, userEmail: email, userProfileURL: downloadURL, userBio: "New Exploratory User", citiesVisited: 0, countriesVisited: 0, distanceTraveled: 0.0)
+                let user = User(username: username, userID: userUID, userEmail: email, userProfileURL: downloadURL, userBio: "New Exploratory User", citiesVisited: 1, countriesVisited: 1, distanceTraveled: 0.0)
                 
                 // Save the user doc into firebase database
                 let _ = try Firestore.firestore().collection("Users").document(userUID).setData(from: user, completion: {
@@ -310,6 +316,7 @@ struct SignUpView: View {
         
     }
     
+    // MARK: Set Error
     func setError(_ error: Error) async {
         
         // MARK: UI updated on the main thread
@@ -330,7 +337,7 @@ struct SignUpView_Previews: PreviewProvider {
     }
 }
 
-
+// MARK: View Extension
 extension View {
     func placeholder<Content: View>(
         when shouldShow: Bool,
@@ -344,6 +351,7 @@ extension View {
     }
 }
 
+// MARK: UI Image
 extension UIImage {
     func resized(to targetSize: CGSize) -> UIImage? {
         let widthRatio  = targetSize.width  / size.width
@@ -367,7 +375,7 @@ extension UIImage {
 }
 
 
-
+// MARK: Color Extension
 // Extension to use hex colors
 extension Color {
     init(hex: UInt, alpha: Double = 1.0) {
