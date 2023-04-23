@@ -10,6 +10,7 @@ import MapKit
 import FirebaseAuth
 import FirebaseDatabase
 
+// MARK: Begin Main View
 struct MainPage: View {
     
     // App Storage to get user information
@@ -241,7 +242,7 @@ struct MainPage: View {
         }
     }
     
-    // MARK: Svae Location to DB
+    // MARK: Save Location to DB
     // Save user's location data to Realtime Database
     func saveLocation(latitude: Double, longitude: Double) {
         guard let userUID = Auth.auth().currentUser?.uid else {
@@ -300,9 +301,6 @@ extension View {
             .disabled(condition)
             .opacity(condition ? 0.6 : 1)
     }
-    
-    
-
     
 }
 

@@ -17,10 +17,12 @@ struct Statistics: Codable {
     var distanceTraveled: Double
 }
 
+// MARK: Begin View
 struct StatisticsView: View {
+    
     @StateObject var statsViewModel = StatisticsViewModel()
     
-
+    // MARK: Control Body
     var body: some View {
         VStack {
             Text("Statistics")
@@ -28,6 +30,8 @@ struct StatisticsView: View {
                 .fontWeight(.bold)
                 .padding()
 
+            // MARK: Begin Images
+            // Show the Visited Locations
             VStack {
                 VStack {
                     Text("\(statsViewModel.citiesVisited)")
@@ -37,6 +41,10 @@ struct StatisticsView: View {
                     Text("Cities Visited")
                         .font(.headline)
                         .foregroundColor(.secondary)
+                    
+                    Image(systemName: "map.circle.fill")
+                        .scaleEffect(2.5)
+                        .offset(y: 25)
                 }
                 Spacer()
                 VStack {
@@ -47,6 +55,11 @@ struct StatisticsView: View {
                     Text("Countries Visited")
                         .font(.headline)
                         .foregroundColor(.secondary)
+                    
+                    Image(systemName: "globe.americas.fill")
+                        .scaleEffect(2.5)
+                        .offset(y: 25)
+                    
                 }
                 Spacer()
                 VStack {
@@ -57,11 +70,17 @@ struct StatisticsView: View {
                     Text("Distance Traveled")
                         .font(.headline)
                         .foregroundColor(.secondary)
+                    
+                    Image(systemName: "figure.hiking")
+                        .scaleEffect(2.5)
+                        .offset(y: 25)
+
                 }
             }
             .padding()
             Spacer()
         }
+        // MARK: Navigation Information
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarHidden(false)
         .onAppear {

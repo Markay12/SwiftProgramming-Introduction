@@ -41,24 +41,16 @@ class StatisticsViewModel: NSObject, ObservableObject {
         guard let currentUser = Auth.auth().currentUser else { return }
 
         let db = Firestore.firestore()
-        let docRef = db.collection("statistics").document(currentUser.uid)
+        let userRef = db.collection("Users").document(currentUser.uid)
 
-        docRef.getDocument { (document, error) in
+        userRef.getDocument { (document, error) in
             if let error = error {
                 print("Error fetching statistics: \(error)")
             } else if let document = document, document.exists {
                 if let data = document.data() {
-                    do {
-                        let jsonData = try JSONSerialization.data(withJSONObject: data, options: [])
-                        let stats = try JSONDecoder().decode(Statistics.self, from: jsonData)
-                        DispatchQueue.main.async {
-                            self.citiesVisited = stats.citiesVisited
-                            self.countriesVisited = stats.countriesVisited
-                            self.distanceTraveled = stats.distanceTraveled
-                        }
-                    } catch let error {
-                        print("Error decoding statistics: \(error)")
-                    }
+                    self.citiesVisited = data["citiesVisited"] as? Int ?? 0
+                    self.countriesVisited = data["countriesVisited"] as? Int ?? 0
+                    self.distanceTraveled = data["distanceTraveled"] as? Double ?? 0.0
                 } else {
                     print("Document does not exist")
                 }
@@ -68,9 +60,6 @@ class StatisticsViewModel: NSObject, ObservableObject {
         }
     }
 
-
-
-    
     
     private func fetchTravelHistory() {
         guard let userId = userId else { return }
