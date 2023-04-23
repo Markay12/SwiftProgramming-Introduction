@@ -8,6 +8,7 @@
 import SwiftUI
 import MapKit
 
+// MARK: Begin Map Details
 enum MapDetails
 {
     
@@ -16,6 +17,7 @@ enum MapDetails
     
 }
 
+// MARK: Map ViewModel, Variable Declarations
 final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     // Beginning location data at Arizona State University Tempe
@@ -36,10 +38,12 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     
     @Published var alert: AlertItem?
     
+    // MARK: ALERT
     enum AlertItem: Identifiable {
         case locationServicesDisabled
         case locationPermissionDenied
         
+        // MARK: Location Services
         var id: String {
             switch self {
             case .locationServicesDisabled:
@@ -67,6 +71,7 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         }
     }
     
+    // MARK: Initialization
     override init() {
             super.init()
             locationManager = CLLocationManager()
@@ -76,6 +81,7 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
             locationManager?.startUpdatingLocation()
         }
     
+
     func checkIfLocationServicesEnabled() {
         if CLLocationManager.locationServicesEnabled() {
             locationManager = CLLocationManager()
@@ -86,6 +92,7 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         }
     }
     
+    // MARK: Update Location
     // Update user's location on the map
     func updateUserLocation(latitude: Double, longitude: Double) {
         let newCoordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
@@ -98,6 +105,7 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         locationManager?.startUpdatingLocation()
     }
     
+    // MARK: Check Authentication
     private func checkLocationAuthorization() {
         guard let locationManager = locationManager else { return }
         switch locationManager.authorizationStatus {
@@ -124,6 +132,7 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     }
 
     
+    // MARK: Check Loc Auth
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         
         // If location management has changed we want to check the authorization again
@@ -143,6 +152,7 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     }
 
 
+    // MARK: Weather JSON Data
     // Fetch Weather Data using an API call
     func fetchWeatherData() {
         guard let location = locationManager?.location else {

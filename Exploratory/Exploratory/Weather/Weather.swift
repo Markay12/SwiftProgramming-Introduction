@@ -7,6 +7,8 @@
 
 import Foundation
 
+
+// Weather Structure
 struct WeatherModel: Codable {
     let main: Main
     let weather: [Weather]
