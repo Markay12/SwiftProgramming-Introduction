@@ -10,7 +10,6 @@ import Firebase
 import Foundation
 import FirebaseAuth
 
-
 struct LoginScreen: View {
     
     // MARK: Setup Variables
@@ -40,7 +39,6 @@ struct LoginScreen: View {
     @State var isStarting: Bool = false
     
     // MARK: Begin View
-    
     var body: some View {
         NavigationView
         {
@@ -49,8 +47,7 @@ struct LoginScreen: View {
                 // Black background
                 Color.black
                 
-                // MARK: Begin Formatting for Background
-                
+                // MARK: Formatting for Background
                 // Gradient Rectangle for Formatting
                 Circle()
                         .foregroundStyle(.linearGradient(
@@ -103,6 +100,7 @@ struct LoginScreen: View {
                         .font(.system(size: 24, weight: .bold, design: .rounded))
                         .offset(x: -126, y: -170)
                     
+                    // MARK: Email Field
                     //email text field
                     TextField("", text: $email)
                         .foregroundColor(.white)
@@ -118,6 +116,8 @@ struct LoginScreen: View {
                     Rectangle()
                         .frame(width: 350, height: 1)
                         .foregroundColor(.white)
+                    
+                    // MARK: Password Field
                     
                     SecureField("", text: $password)
                         .foregroundColor(.white)
@@ -141,6 +141,9 @@ struct LoginScreen: View {
                         login()
                         
                     } label: {
+                        
+                        // MARK: Sign in Button
+                        
                         // login Text with background gradient same as the rounded rectangle
                         Text("Sign in")
                             .bold()
@@ -177,7 +180,6 @@ struct LoginScreen: View {
                     }
                     
                     // MARK: Navigation to Sign Up
-                    
                     Button {
                         isSignUpShowing = true
                     } label: {
@@ -199,6 +201,7 @@ struct LoginScreen: View {
                 
             }
             .ignoresSafeArea()
+            // Animation of the main circles
             .onAppear {
                 // Call the animation function when the view appears
                 isStarting = true
@@ -217,6 +220,8 @@ struct LoginScreen: View {
         
     }
     
+    
+    // MARK: Close Keyboard Function
     func closeKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
@@ -230,6 +235,7 @@ struct LoginScreen: View {
         
         // MARK: User Authentication
         // With error handling
+        
         Auth.auth().signIn(withEmail: email, password: password) { _, error in
             if let error = error {
                 // Handle login error
@@ -241,7 +247,7 @@ struct LoginScreen: View {
                 // Handle successful login
                 print("User logged in successfully")
                 
-                
+                // Set boolean variables
                 logStatus = true
                 successfulLogin = true
                 showMainPage = true
