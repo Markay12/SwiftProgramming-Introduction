@@ -8,12 +8,18 @@
 import SwiftUI
 
 struct LoadingView: View {
+    
+    // MARK: Declaration of Variables
     @Binding var show: Bool
+    
+    
+    // MARK: Begin Main View
     var body: some View {
         ZStack
         {
             if show
             {
+                // Group rectangle and progress for animation
                 Group {
                     Rectangle()
                         .fill(.black.opacity(0.25))
@@ -25,6 +31,7 @@ struct LoadingView: View {
                 }
             }
         }
+        // Begin animation
         .animation(.easeInOut(duration: 0.25), value: show)
     }
 }

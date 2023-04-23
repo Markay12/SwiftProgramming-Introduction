@@ -53,7 +53,7 @@ struct ProfileContent: View {
                             .font(.caption)
                             .foregroundColor(.gray)
                         
-                        Text("Distance Traveled: \(user.distanceTraveled)")
+                        Text("Distance Traveled: \(user.distanceTraveled, specifier: "%.2f") km")
                             .font(.caption)
                             .foregroundColor(.gray)
                                                 
