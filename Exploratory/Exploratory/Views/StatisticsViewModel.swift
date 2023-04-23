@@ -13,6 +13,8 @@ import FirebaseFirestore
 import Combine
 
 class StatisticsViewModel: NSObject, ObservableObject {
+    
+    // MARK: Variable Declaration
     @Published var citiesVisited = 0
     @Published var countriesVisited = 0
     @Published var distanceTraveled = 0.0 // Initialize to zero
@@ -23,6 +25,7 @@ class StatisticsViewModel: NSObject, ObservableObject {
     private let databaseRef = Database.database().reference()
     private let userId = Auth.auth().currentUser?.uid
     
+    // MARK: Initialization
     override init() {
         super.init()
         
@@ -37,6 +40,7 @@ class StatisticsViewModel: NSObject, ObservableObject {
         fetchTravelHistory()
     }
     
+    // MARK: Fetch Statistics
     func fetchStats() {
         guard let currentUser = Auth.auth().currentUser else { return }
 
@@ -60,7 +64,7 @@ class StatisticsViewModel: NSObject, ObservableObject {
         }
     }
 
-    
+    // MARK: Get User Travel History
     private func fetchTravelHistory() {
         guard let userId = userId else { return }
         let travelHistoryRef = databaseRef.child("users").child(userId).child("travelHistory")
@@ -74,6 +78,7 @@ class StatisticsViewModel: NSObject, ObservableObject {
         }
     }
     
+    // MARK: Update User Travel History
     private func updateTravelHistory() {
         guard let userId = userId else { return }
         
@@ -108,6 +113,7 @@ class StatisticsViewModel: NSObject, ObservableObject {
     }
 
     
+    // MARK: Update the Users Distance Traveled
     private func updateDistanceTraveled(to newLocation: CLLocation) {
         guard let previousLocation = previousLocation else {
             self.previousLocation = newLocation
