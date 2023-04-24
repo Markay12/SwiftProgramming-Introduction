@@ -96,8 +96,6 @@ struct MainPage: View {
             
             // MARK: Begin UI Rectangles
             
-
-            
             Rectangle()
                 .fill(Color.black)
                 .frame(width: 395, height: 425)
