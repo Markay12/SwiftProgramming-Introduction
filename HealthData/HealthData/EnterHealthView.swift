@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// MARK: Enter the Health View
 struct EnterHealthView: View {
     @State private var bloodPressure = ""
     @State private var weight = ""
@@ -14,6 +15,8 @@ struct EnterHealthView: View {
     @State private var date = Date()
 
     var body: some View {
+        
+        // MARK: Begin Navigation View
         NavigationView {
             Form {
                 Section(header: Text("Enter Health Data")) {
@@ -31,6 +34,7 @@ struct EnterHealthView: View {
         }
     }
     
+    // MARK: Save the Data
     func saveData() {
         DataManager.shared.saveHealthData(bloodPressure: bloodPressure, weight: weight, sugarLevel: sugarLevel, date: date)
         clearFields()

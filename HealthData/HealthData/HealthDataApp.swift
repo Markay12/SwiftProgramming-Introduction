@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// MARK: Main Struct
 @main
 struct HealthDataApp: App {
     let persistenceController = PersistenceController.shared

@@ -8,11 +8,13 @@
 import Foundation
 import CoreData
 
+// MARK: Begin DataManager Class
 class DataManager {
     static let shared = DataManager()
     
     let persistentContainer: NSPersistentContainer
     
+    // MARK: Init Methods
     private init() {
         persistentContainer = NSPersistentContainer(name: "HealthData")
         persistentContainer.loadPersistentStores { (storeDescription, error) in
@@ -22,6 +24,7 @@ class DataManager {
         }
     }
     
+    // MARK: Saving Context
     func saveContext() {
         let context = persistentContainer.viewContext
         if context.hasChanges {
@@ -34,6 +37,7 @@ class DataManager {
         }
     }
     
+    // MARK: Save Health Data
     func saveHealthData(bloodPressure: String, weight: String, sugarLevel: String, date: Date) {
         let context = persistentContainer.viewContext
         let healthData = HealthData(context: context)
@@ -45,6 +49,7 @@ class DataManager {
         saveContext()
     }
     
+    // MARK: Fetch the Health Data
     func fetchHealthData(startDate: Date, endDate: Date) -> [HealthData] {
         let context = persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<HealthData> = HealthData.fetchRequest()
