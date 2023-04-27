@@ -40,6 +40,7 @@ struct EnterHealthView: View {
         clearFields()
     }
     
+    // MARK: Clear Field Function
     func clearFields() {
         bloodPressure = ""
         weight = ""
